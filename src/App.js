@@ -2,6 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Button from 'react-bootstrap/Button';
+
+import { Icon } from '@iconify/react';
+import accountIcon from '@iconify/icons-mdi/account';
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +23,10 @@ function App() {
         >
           Learn React
         </a>
+        <Button>
+          <Icon icon={accountIcon} />
+          Test
+        </Button>
       </header>
     </div>
   );
