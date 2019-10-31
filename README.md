@@ -10,7 +10,8 @@ CS2102 Group Project
 
 ## Running the Project
 
-`npm start`
+1. `node server.js`
+2. `npm start`
 
 The app should open in a new window at http://localhost:3000
 
