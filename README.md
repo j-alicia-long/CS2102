@@ -6,19 +6,27 @@ A new course management system designed for universities. Read the comprehensive
 
 Project developed by Loh Jia Hao (lohjiahao1995@gmail.com), Jennifer Long (j.alicia.long@gmail.com), Jolyn Tan (jolyn.tanyj@gmail.com), and Yu Qi Wong (wongyuqi107@gmail.com) for CS2102 AY19/20 Sem 1 at the National University of Singapore.
 
-## Setup Instructions
+
+## Instructions
+
+### Setup
 
 Clone the repository and run the following to install dependencies:
 `npm install`
 
-## Running the Project
+#### Database setup [TBD]
+Update the `.env` file with your postgres username, password, and database name
 
-Navigate to the project directory and run the following two commands in separate consoles
+
+### Running the Project
+
+Navigate to the project directory and run the following two commands in separate consoles:
 
 1. `node server.js`
 2. `npm start`
 
 The app should open in a new window at http://localhost:3000
+
 
 ## Dependencies
 
