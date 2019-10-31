@@ -27,3 +27,11 @@ https://react-bootstrap.github.io/components/alerts
 For icons
 
 https://iconify.design/
+
+# Express Setup Tutorial
+
+https://medium.com/@maison.moa/setting-up-an-express-backend-server-for-create-react-app-bc7620b20a61
+
+# Postgresql Database Setup Tutorial
+
+https://www.taniarascia.com/node-express-postgresql-heroku/#set-up-postgresql-database
