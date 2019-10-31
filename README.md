@@ -1,37 +1,42 @@
-# CS2102
+# Course-Star
 
-CS2102 Group Project
+A new course management system designed for universities. Read the comprehensive project report [here](https://docs.google.com/document/d/1ENF5UO0I38q2edzLOLcoxlV74OWQ3HdITq-fU0ZmC04/edit?usp=sharing)
 
-# Instructions
+#### Contributors
 
-## Setup
+Project developed by Loh Jia Hao (lohjiahao1995@gmail.com), Jennifer Long (j.alicia.long@gmail.com), Jolyn Tan (jolyn.tanyj@gmail.com), and Yu Qi Wong (wongyuqi107@gmail.com) for CS2102 AY19/20 Sem 1 at the National University of Singapore.
 
+## Setup Instructions
+
+Clone the repository and run the following to install dependencies:
 `npm install`
 
 ## Running the Project
 
-Run the following commands on separate terminals:
+Navigate to the project directory and run the following two commands in separate consoles
 
 1. `node server.js`
 2. `npm start`
 
 The app should open in a new window at http://localhost:3000
 
-# Dependencies
+## Dependencies
 
-## React-Bootstrap
+### React-Bootstrap
 
 For UI components
 
 https://react-bootstrap.github.io/components/alerts
 
-## Iconify
+### Iconify
 
 For icons
 
 https://iconify.design/
 
-# Express Setup Tutorial
+## Setup Tutorials
+
+### Express Setup Tutorial
 
 https://medium.com/@maison.moa/setting-up-an-express-backend-server-for-create-react-app-bc7620b20a61
 
