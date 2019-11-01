@@ -10,7 +10,9 @@
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "@iconify/icons-mdi": "^1.0.25",
+    "@iconify/react": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,8 +39,6 @@
     ]
   },
   "devDependencies": {
-    "@iconify/icons-mdi": "^1.0.25",
-    "@iconify/react": "^1.1.1",
     "body-parser": "^1.19.0",
     "gh-pages": "^2.1.1",
     "nodemon": "^1.19.4"
