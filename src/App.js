@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import { Icon } from '@iconify/react';
 import accountIcon from '@iconify/icons-mdi/account';
 
+import Navigation from "./Navigation.js";
+
 class App extends React.Component {
   state = {
     data: []
@@ -38,6 +40,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <Navigation></Navigation>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
