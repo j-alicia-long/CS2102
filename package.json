@@ -1,50 +1,30 @@
 {
   "name": "cs2102",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://j-alicia-long.github.io/CS2102",
+  "version": "1.0.0",
+  "description": "A new course management system designed for universities. Read the comprehensive project report [here](https://docs.google.com/document/d/1ENF5UO0I38q2edzLOLcoxlV74OWQ3HdITq-fU0ZmC04/edit?usp=sharing)",
+  "main": "config.js",
   "dependencies": {
-    "bootstrap": "^4.3.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "pg": "^7.12.1",
-    "react": "^16.11.0",
-    "react-bootstrap": "^1.0.0-beta.14",
-    "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
-  },
-  "scripts": {
-    "start": "node server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@iconify/icons-mdi": "^1.0.25",
-    "@iconify/react": "^1.1.1",
-    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "gh-pages": "^2.1.1",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "pg": "^7.12.1"
   },
-  "engines": {
-    "node": "10.15.3"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-alicia-long/CS2102.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j-alicia-long/CS2102/issues"
+  },
+  "homepage": "https://github.com/j-alicia-long/CS2102#readme"
 }
