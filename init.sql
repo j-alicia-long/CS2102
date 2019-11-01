@@ -6,4 +6,5 @@ CREATE TABLE Users (
   UNIQUE (uid, name)
 );
 
-INSERT INTO Users VALUES('a', 'b', 'c', 'd');
+INSERT INTO Users VALUES('0', 'password1', 'john', 'd');
+INSERT INTO Users VALUES('1', 'password2', 'smith', 'd');

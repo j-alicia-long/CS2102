@@ -34,7 +34,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log('STATE: ', this.state.data);
+    console.log('STATE IN RDNER: ', this.state.data);
 
     return (
       <div className="App">
@@ -47,12 +47,16 @@ class App extends React.Component {
           </Button>
         </header>
         {/* Render the newly fetched data inside of this.state.data */}
-        {/* <p className="App-intro">
-          hello
-          {this.state.data.map(x => (
-            <li>{x}</li>
+        <p className="App-intro">
+          {this.state.data.map((user, i) => (
+            <div key={i}>
+              <p key={i}>User: {user.name}</p>
+              <li key={i}>uid: {user.uid}</li>
+              <li key={i}>pass: {user.pass}</li>
+              <li key={i}>faculty: {user.faculty}</li>
+            </div>
           ))}
-        </p> */}
+        </p>
       </div>
     );
   }
