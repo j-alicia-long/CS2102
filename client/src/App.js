@@ -1,6 +1,6 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 import Button from 'react-bootstrap/Button';
 
@@ -46,17 +46,17 @@ class App extends React.Component {
             Test
           </Button>
         </header>
-        {/* Render the newly fetched data inside of this.state.data */}
-        <p className="App-intro">
+        <h1>DATABASE</h1>
+        <div className="App-intro">
           {this.state.data.map((user, i) => (
-            <div key={i}>
-              <p key={i}>User: {user.name}</p>
-              <li key={i}>uid: {user.uid}</li>
-              <li key={i}>pass: {user.pass}</li>
-              <li key={i}>faculty: {user.faculty}</li>
+            <div key={`${i}-user`}>
+              <span key={`${i}-name`}>Name: {user.name} | </span>
+              <span key={`${i}-uid`}>uid: {user.uid} | </span>
+              <span key={`${i}-pass`}>pass: {user.pass} | </span>
+              <span key={`${i}-faculty`}>faculty: {user.faculty}</span>
             </div>
           ))}
-        </p>
+        </div>
       </div>
     );
   }

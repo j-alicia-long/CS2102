@@ -6,6 +6,7 @@ const { pool } = require('./config');
 
 const app = express();
 
+// Serves the client when deployed in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
