@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
-import Button from 'react-bootstrap/Button';
-
-import { Icon } from '@iconify/react';
-import accountIcon from '@iconify/icons-mdi/account';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import Course from "./pages/Course";
+import FacilitatorList from "./pages/FacilitatorList";
+import StudentList from "./pages/StudentList";
 
 class App extends React.Component {
   state = {
@@ -23,37 +23,29 @@ class App extends React.Component {
 
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/users');
+    const response = await fetch("/users");
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message);
     }
-    console.log('RESPONSE SUCCESS: ', body);
+    console.log("RESPONSE SUCCESS: ", body);
     return body;
   };
 
   render() {
-    console.log('STATE: ', this.state.data);
+    console.log("STATE: ", this.state.data);
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-          <Button>
-            <Icon icon={accountIcon} />
-            Test
-          </Button>
-        </header>
-        {/* Render the newly fetched data inside of this.state.data */}
-        {/* <p className="App-intro">
-          hello
-          {this.state.data.map(x => (
-            <li>{x}</li>
-          ))}
-        </p> */}
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={MainPage} />
+          <Route exact path="/MainPage" component={MainPage} />
+          <Route exact path="/Course" component={Course} />
+          <Route exact path="/FacilitatorList" component={FacilitatorList} />
+          <Route exact path="/StudentList" component={StudentList} />
+        </Switch>
+      </Router>
     );
   }
 }
