@@ -11,8 +11,13 @@ Project developed by Loh Jia Hao (lohjiahao1995@gmail.com), Jennifer Long (j.ali
 
 ### Setup
 
-Clone the repository and run the following to install dependencies:
-`npm install`
+1. Clone the repository and run the following to install dependencies:
+
+   `npm install`
+
+2. Refer to the .env file found in the root folder of the project
+   - Either update parameters in the .env file with your postgres settings, or
+   - Create new user and database to match parameters in the .env file. Refer to this: https://stackoverflow.com/questions/50180667/how-can-i-connect-to-a-database-as-another-user
 
 #### Database setup [TBD]
 Update the `.env` file with your postgres username, password, and database name
