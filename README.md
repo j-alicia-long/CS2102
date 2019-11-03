@@ -22,6 +22,11 @@ Make sure that you are in the root directory of the project and run the followin
 
 The app should open in a new window at http://localhost:3000
 
+### Making API Calls
+
+You can check the result of your api call at http://localhost:5000 after running the project.
+
+E.g. http://localhost:5000/users will display the list of users.
 
 ## Dependencies
 
