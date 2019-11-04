@@ -6,6 +6,7 @@ import MainPage from './pages/MainPage';
 import Course from './pages/Course';
 import FacilitatorList from './pages/FacilitatorList';
 import StudentList from './pages/StudentList';
+import CourseForum from './pages/CourseForum';
 
 class App extends React.Component {
   state = {
@@ -44,6 +45,7 @@ class App extends React.Component {
           <Route exact path="/Course" component={Course} />
           <Route exact path="/FacilitatorList" component={FacilitatorList} />
           <Route exact path="/StudentList" component={StudentList} />
+          <Route exact path="/CourseForum" component={CourseForum} />
         </Switch>
       </Router>
     );
