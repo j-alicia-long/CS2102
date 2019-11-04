@@ -49,6 +49,7 @@ CREATE TABLE Supervises (
 CREATE TABLE Courses (
   cid       varchar(20),
   yearsem   varchar(20),
+  name      varchar(20),
   uid       varchar(50) REFERENCES Professors (uid),
   PRIMARY KEY (cid, yearsem)
 );

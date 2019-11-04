@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import Button from 'react-bootstrap/Button';
-
-import { Icon } from '@iconify/react';
-import accountIcon from '@iconify/icons-mdi/account';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import Course from './pages/Course';
+import FacilitatorList from './pages/FacilitatorList';
+import StudentList from './pages/StudentList';
 
 class App extends React.Component {
   state = {
@@ -34,30 +34,18 @@ class App extends React.Component {
   };
 
   render() {
-    console.log('STATE IN RDNER: ', this.state.data);
+    console.log('STATE: ', this.state.data);
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-          <Button>
-            <Icon icon={accountIcon} />
-            Test
-          </Button>
-        </header>
-        <h1>DATABASE</h1>
-        <div className="App-intro">
-          {this.state.data.map((user, i) => (
-            <div key={`${i}-user`}>
-              <span key={`${i}-name`}>Name: {user.name} | </span>
-              <span key={`${i}-uid`}>uid: {user.uid} | </span>
-              <span key={`${i}-pass`}>pass: {user.pass} | </span>
-              <span key={`${i}-faculty`}>faculty: {user.faculty}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={MainPage} />
+          <Route exact path="/MainPage" component={MainPage} />
+          <Route exact path="/Course" component={Course} />
+          <Route exact path="/FacilitatorList" component={FacilitatorList} />
+          <Route exact path="/StudentList" component={StudentList} />
+        </Switch>
+      </Router>
     );
   }
 }

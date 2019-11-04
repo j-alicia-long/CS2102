@@ -109,17 +109,17 @@ INSERT INTO Supervises VALUES ('A0000020', 'A0000032');
 
 -- Courses
 
-INSERT INTO Courses VALUES ('EE1000', '2019-01', 'A0000027');
-INSERT INTO Courses VALUES ('EE1111', '2019-01', 'A0000028');
-INSERT INTO Courses VALUES ('EE2222', '2019-01', 'A0000028');
-INSERT INTO Courses VALUES ('EE3333', '2019-01', 'A0000029');
-INSERT INTO Courses VALUES ('EE4444', '2019-01', 'A0000029');
+INSERT INTO Courses VALUES ('EE1000', '2019-01', 'Introduction to Electrical Engineering', 'A0000027');
+INSERT INTO Courses VALUES ('EE1111', '2019-01', 'Electrical Systems I', 'A0000028');
+INSERT INTO Courses VALUES ('EE2222', '2019-01', 'Electrical Systems II', 'A0000028');
+INSERT INTO Courses VALUES ('EE3333', '2019-01', 'Systems and Signals', 'A0000029');
+INSERT INTO Courses VALUES ('EE4444', '2019-01', 'Eletrical Circuits IV', 'A0000029');
 
-INSERT INTO Courses VALUES ('CS1000', '2019-01', 'A0000030');
-INSERT INTO Courses VALUES ('CS1111', '2019-01', 'A0000031');
-INSERT INTO Courses VALUES ('CS2222', '2019-01', 'A0000031');
-INSERT INTO Courses VALUES ('CS3333', '2019-01', 'A0000032');
-INSERT INTO Courses VALUES ('CS4444', '2019-01', 'A0000032');
+INSERT INTO Courses VALUES ('CS1000', '2019-01', 'Programming Methodology', 'A0000030');
+INSERT INTO Courses VALUES ('CS1111', '2019-01', 'Data Structures and Algorithms', 'A0000031');
+INSERT INTO Courses VALUES ('CS2222', '2019-01', 'Database Systems', 'A0000031');
+INSERT INTO Courses VALUES ('CS3333', '2019-01', 'Introduction to Artificial Intelligence', 'A0000032');
+INSERT INTO Courses VALUES ('CS4444', '2019-01', 'Discrete Structures', 'A0000032');
 
 -- Selects
 
