@@ -1,6 +1,6 @@
 # Course-Star
 
-A new course management system designed for universities. Read the comprehensive project report [here](https://docs.google.com/document/d/1ENF5UO0I38q2edzLOLcoxlV74OWQ3HdITq-fU0ZmC04/edit?usp=sharing)
+A new course management system designed for universities. Visit it [here](https://cs2102-7.herokuapp.com/) or read the comprehensive project report [here](https://docs.google.com/document/d/1ENF5UO0I38q2edzLOLcoxlV74OWQ3HdITq-fU0ZmC04/edit?usp=sharing).
 
 #### Contributors
 
@@ -10,23 +10,23 @@ Project developed by Loh Jia Hao (lohjiahao1995@gmail.com), Jennifer Long (j.ali
 
 ### Setup
 
-1. Clone the repository and run the following to install dependencies:
+Clone the repository and run the following to install dependencies:
 
-   `npm install`
-
-2. Refer to the .env file found in the root folder of the project
-   - Either update parameters in the .env file with your postgres settings, or
-   - Create new user and database to match parameters in the .env file. Refer to this: https://stackoverflow.com/questions/50180667/how-can-i-connect-to-a-database-as-another-user
-
-#### Database setup [TBD]
-
-Update the `.env` file with your postgres username, password, and database name
+`npm install`
 
 ### Running the Project
+
+Make sure that you are in the root directory of the project and run the following:
 
 `npm run dev`
 
 The app should open in a new window at http://localhost:3000
+
+### Making API Calls
+
+You can check the result of your api call at http://localhost:5000 after running the project.
+
+E.g. http://localhost:5000/users will display the list of users.
 
 ## Dependencies
 
@@ -48,6 +48,6 @@ https://iconify.design/
 
 https://medium.com/@maison.moa/setting-up-an-express-backend-server-for-create-react-app-bc7620b20a61
 
-# Postgresql Database + Heroku Setup Tutorial
+### Postgresql Database + Heroku Setup Tutorial
 
 https://www.taniarascia.com/node-express-postgresql-heroku/#set-up-postgresql-database
