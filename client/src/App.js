@@ -34,18 +34,29 @@ class App extends React.Component {
   };
 
   render() {
-    console.log('STATE: ', this.state.data);
-
     return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route exact path="/MainPage" component={MainPage} />
-          <Route exact path="/Course" component={Course} />
-          <Route exact path="/FacilitatorList" component={FacilitatorList} />
-          <Route exact path="/StudentList" component={StudentList} />
-        </Switch>
-      </Router>
+      <div>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+            <Route exact path="/MainPage" component={MainPage} />
+            <Route exact path="/Course" component={Course} />
+            <Route exact path="/FacilitatorList" component={FacilitatorList} />
+            <Route exact path="/StudentList" component={StudentList} />
+          </Switch>
+        </Router>
+        <h1>USER DATABASE</h1>
+        <div className="App-intro">
+          {this.state.data.map((user, i) => (
+            <div key={`${i}-user`}>
+              <span key={`${i}-name`}>Name: {user.name} | </span>
+              <span key={`${i}-uid`}>uid: {user.uid} | </span>
+              <span key={`${i}-pass`}>pass: {user.pass} | </span>
+              <span key={`${i}-faculty`}>faculty: {user.faculty}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     );
   }
 }
