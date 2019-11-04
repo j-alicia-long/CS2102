@@ -8,6 +8,9 @@ import { Icon } from '@iconify/react';
 import accountIcon from '@iconify/icons-mdi/account';
 
 import Navigation from "./Navigation.js";
+import LoginForm from "./Login.js";
+import MyCourses from "./MyCourses.js";
+
 
 class App extends React.Component {
   state = {
@@ -41,15 +44,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navigation></Navigation>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-          <Button>
-            <Icon icon={accountIcon} />
-            Test
-          </Button>
-        </header>
-        {/* Render the newly fetched data inside of this.state.data */}
+        <LoginForm></LoginForm>
+        <MyCourses></MyCourses>
+        // {/* Render the newly fetched data inside of this.state.data */}
         <p className="App-intro">
           {this.state.data.map((user, i) => (
             <div key={i}>
