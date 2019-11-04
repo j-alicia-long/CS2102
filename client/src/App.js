@@ -2,13 +2,18 @@ import React from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navigation from './Navigation';
 import MainPage from './pages/MainPage';
+import LoginPage from './pages/LoginPage';
+import MyCourses from './pages/MyCourses';
+import CourseSearch from './pages/CourseSearch';
 import Course from './pages/Course';
 import FacilitatorList from './pages/FacilitatorList';
 import StudentList from './pages/StudentList';
 
 class App extends React.Component {
   state = {
+    login: false,
     data: []
   };
 
@@ -36,10 +41,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Navigation></Navigation>
         <Router>
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route exact path="/MainPage" component={MainPage} />
+            <Route exact path="/Home" component={MainPage} />
+            <Route exact path="/Login" component={LoginPage} />
+            <Route exact path="/MyCourses" component={MyCourses} />
+            <Route exact path="/Search" component={CourseSearch} />
             <Route exact path="/Course" component={Course} />
             <Route exact path="/FacilitatorList" component={FacilitatorList} />
             <Route exact path="/StudentList" component={StudentList} />
