@@ -40,11 +40,11 @@ const getCourseById = (req, res) => {
 };
 
 const addCourse = (req, res) => {
-  const { cid, yearsem, uid } = req.body;
+  const { cid, yearsem, name, uid } = req.body;
 
   pool.query(
-    'INSERT INTO Courses (cid, yearsem, uid) VALUES ($1, $2, $3)',
-    [cid, yearsem, uid],
+    'INSERT INTO Courses (cid, yearsem, name, uid) VALUES ($1, $2, $3)',
+    [cid, yearsem, name, uid],
     error => {
       if (error) {
         console.error(error);
