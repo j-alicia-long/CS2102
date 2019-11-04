@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const routers = require('./routers');
+const routes = require('./routes');
 
 const app = express();
 
@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // Routes
-app.use('/users', routers.users);
-app.use('/courses', routers.courses);
+app.use('/users', routes.users);
+app.use('/courses', routes.courses);
 
 // Start server
 app.listen(process.env.PORT || 5000, () => {
