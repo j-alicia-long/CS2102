@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -23,7 +24,22 @@ class LoginForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    fetch("/auth", {
+      method: "POST",
+      body: JSON.stringify(this.state),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      console.log("status: ", res.status);
+      if (res.status === 200) {
+        console.log("good");
 
+        this.props.history.push("/MyCourses");
+      } else {
+        alert("Error logging in please try again");
+      }
+    });
   }
 
   render() {
@@ -69,4 +85,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);
