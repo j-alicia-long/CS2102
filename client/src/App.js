@@ -1,15 +1,18 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navigation from './Navigation';
-import MainPage from './pages/MainPage';
-import LoginPage from './pages/LoginPage';
-import MyCourses from './pages/MyCourses';
-import CourseSearch from './pages/CourseSearch';
-import Course from './pages/Course';
-import FacilitatorList from './pages/FacilitatorList';
-import StudentList from './pages/StudentList';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navigation from "./Navigation";
+import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
+import MyCourses from "./pages/MyCourses";
+import CourseSearch from "./pages/CourseSearch";
+import Course from "./pages/Course";
+import FacilitatorList from "./pages/FacilitatorList";
+import StudentList from "./pages/StudentList";
+
+import WithAuth from "./pages/WithAuth";
+import Secret from "./pages/Secret";
 
 class App extends React.Component {
   state = {
@@ -28,7 +31,7 @@ class App extends React.Component {
 
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/users');
+    const response = await fetch("/users");
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -51,6 +54,7 @@ class App extends React.Component {
             <Route exact path="/Course" component={Course} />
             <Route exact path="/FacilitatorList" component={FacilitatorList} />
             <Route exact path="/StudentList" component={StudentList} />
+            <Route exact path="/secret" component={WithAuth(Secret)} />
           </Switch>
         </Router>
         <h1>USER DATABASE</h1>
