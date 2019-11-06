@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch("/login", {
+    fetch("/auth/login", {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: {

@@ -10,7 +10,7 @@ class Navigation extends React.Component {
   }
 
   logout = () => {
-    fetch("/logout").then(
+    fetch("/auth/logout").then(
       // logout
       this.props.history.push("/Login")
     );

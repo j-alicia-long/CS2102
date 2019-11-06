@@ -24,56 +24,11 @@ app.use(
   })
 );
 
-// Passport
 app.use(passport.initialize());
-app.use(passport.session()); // calls the deserializeUser
-
-app.post(
-  "/login",
-  function(req, res, next) {
-    next();
-  },
-  passport.authenticate("local"),
-  (req, res) => {
-    console.log("logged in", req.user);
-    res.send(req.user);
-  }
-);
-
-// check authentication
-app.get("/auth/verify", (req, res) => {
-  console.log("my courses");
-  if (req.isAuthenticated()) {
-    console.log("authorised");
-    res.send(req.user);
-  } else {
-    console.log("forbidden");
-    res.status(404).send(req.user);
-  }
-});
-
-// app.get("/", (req, res, next) => {
-//   console.log("===== user!!======");
-//   console.log(req.user);
-//   if (req.user) {
-//     res.json({ user: req.user });
-//   } else {
-//     res.json({ user: null });
-//   }
-// });
-
-app.get("/logout", (req, res) => {
-  if (req.user) {
-    req.logout();
-    console.log("logged out");
-    res.send("logging out");
-  } else {
-    console.log("no user to log out");
-    res.send("no user to log out");
-  }
-});
+app.use(passport.session());
 
 // Routes
+app.use("/auth", routes.auth);
 app.use("/users", routes.users);
 app.use("/courses", routes.courses);
 
