@@ -13,6 +13,7 @@ app.use(cors());
 
 // Routes
 app.use('/users', routes.users);
+app.use('/students', routes.students);
 app.use('/courses', routes.courses);
 
 // Serves the client when deployed in production

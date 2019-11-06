@@ -84,11 +84,82 @@ const deleteCourse = (req, res) => {
   });
 };
 
+const getStudentsInCourse = (req, res) => {
+  const id = req.params.id;
+  const { yearsem } = req.body;
+
+  pool.query(
+    'SELECT uid FROM Selects WHERE cid = $1 AND yearsem = $2',
+    [id, yearsem],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send(`Error fetching selected courses with user ID: ${id}`);
+      }
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
+const getStudentsInCourse = (req, res) => {
+  const id = req.params.id;
+  const { yearsem } = req.body;
+
+  pool.query(
+    'SELECT uid FROM Selects WHERE cid = $1 AND yearsem = $2',
+    [id, yearsem],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send(`Error fetching selected courses with user ID: ${id}`);
+      }
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
+const addStudentToCourse = (req, res) => {
+  const cid = req.params.id;
+  const { uid, yearsem } = req.body;
+
+  pool.query(
+    'INSERT INTO Selects VALUES ($1, $2, $3)',
+    [uid, cid, yearsem],
+    error => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send('Error adding student to course');
+      }
+      res.status(201).send(`Student successfully added to course`);
+    }
+  );
+};
+
+const deleteStudentFromCourse = (req, res) => {
+  const cid = req.params.id;
+  const { uid, yearsem } = req.body;
+
+  pool.query(
+    'DELETE FROM Selects WHERE uid = $1, cid = $2, yearsem = $3',
+    [uid, cid, yearsem],
+    error => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send('Error deleting student from course');
+      }
+      res.status(201).send(`Student successfully deleted from course`);
+    }
+  );
+};
+
 // route paths
 router.get('', getCourses);
 router.get('/:id', getCourseById);
+router.get('/:id/students', getStudentsInCourse);
 router.post('', addCourse);
+router.post('/:id/students', addStudentToCourse);
 router.put('/:id', updateCourse);
 router.delete('/:id', deleteCourse);
+router.delete('/:id/students', deleteStudentFromCourse);
 
 module.exports = router;
