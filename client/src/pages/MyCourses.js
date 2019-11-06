@@ -1,15 +1,43 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 class MyCourses extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
+      username: null
+    };
+
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    this.verifyUser()
+      .then(res => {
+        if (res.status !== 200) {
+          this.props.history.push("/Login");
+        } else {
+          console.log("user logged into MyCourses");
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  verifyUser = async () => {
+    console.log("verying user");
+    const response = await fetch("/auth/verify");
+
+    return response;
+  };
 
   render() {
     return (
@@ -47,4 +75,4 @@ class MyCourses extends React.Component {
   }
 }
 
-export default MyCourses;
+export default withRouter(MyCourses);

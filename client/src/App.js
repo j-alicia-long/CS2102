@@ -1,15 +1,15 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navigation from './Navigation';
-import MainPage from './pages/MainPage';
-import LoginPage from './pages/LoginPage';
-import MyCourses from './pages/MyCourses';
-import CourseSearch from './pages/CourseSearch';
-import Course from './pages/Course';
-import FacilitatorList from './pages/FacilitatorList';
-import StudentList from './pages/StudentList';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navigation from "./Navigation";
+import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
+import MyCourses from "./pages/MyCourses";
+import CourseSearch from "./pages/CourseSearch";
+import Course from "./pages/Course";
+import FacilitatorList from "./pages/FacilitatorList";
+import StudentList from "./pages/StudentList";
 
 class App extends React.Component {
   state = {
@@ -28,7 +28,7 @@ class App extends React.Component {
 
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/users');
+    const response = await fetch("/users");
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -39,20 +39,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Router>
         <Navigation></Navigation>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={MainPage} />
-            <Route exact path="/Home" component={MainPage} />
-            <Route exact path="/Login" component={LoginPage} />
-            <Route exact path="/MyCourses" component={MyCourses} />
-            <Route exact path="/Search" component={CourseSearch} />
-            <Route exact path="/Course" component={Course} />
-            <Route exact path="/FacilitatorList" component={FacilitatorList} />
-            <Route exact path="/StudentList" component={StudentList} />
-          </Switch>
-        </Router>
+        <Switch>
+          <Route exact path="/" component={MainPage} />
+          <Route exact path="/Home" component={MainPage} />
+          <Route exact path="/Login" component={LoginPage} />
+          <Route exact path="/MyCourses" component={MyCourses} />
+          <Route exact path="/Search" component={CourseSearch} />
+          <Route exact path="/Course" component={Course} />
+          <Route exact path="/FacilitatorList" component={FacilitatorList} />
+          <Route exact path="/StudentList" component={StudentList} />
+        </Switch>
         <h1>USER DATABASE</h1>
         <div className="App-intro">
           {this.state.data.map((user, i) => (
@@ -64,7 +62,7 @@ class App extends React.Component {
             </div>
           ))}
         </div>
-      </div>
+      </Router>
     );
   }
 }

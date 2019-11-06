@@ -1,9 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout = () => {
+    fetch("/logout").then(
+      // logout
+      this.props.history.push("/Login")
+    );
+  };
+
+  callBackendAPI = async () => {
+    const response = await fetch("/users");
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
 
   render() {
     return (
@@ -21,11 +42,17 @@ class Navigation extends React.Component {
           </Nav>
           <Nav className="ml-auto" pullRight>
             <p className="text-center mx-4 mt-3">AY19/20 SEM 1</p>
-            <NavDropdown className="justify-content-end" title="Student" id="basic-nav-dropdown">
+            <NavDropdown
+              className="justify-content-end"
+              title="Student"
+              id="basic-nav-dropdown"
+            >
               <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Help</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/Login">Logout</NavDropdown.Item>
+              <NavDropdown.Item href="/Login" onClick={this.logout}>
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
@@ -34,4 +61,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+export default withRouter(Navigation);
