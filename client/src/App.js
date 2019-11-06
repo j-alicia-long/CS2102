@@ -2,6 +2,8 @@ import React from "react";
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PrivateRoute from "./privateRoute";
+
 import Navigation from "./Navigation";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
@@ -45,7 +47,7 @@ class App extends React.Component {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/Home" component={MainPage} />
           <Route exact path="/Login" component={LoginPage} />
-          <Route exact path="/MyCourses" component={MyCourses} />
+          <PrivateRoute exact path="/MyCourses" component={MyCourses} />
           <Route exact path="/Search" component={CourseSearch} />
           <Route exact path="/Course" component={Course} />
           <Route exact path="/FacilitatorList" component={FacilitatorList} />

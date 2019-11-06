@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
+import { authService } from "../authService";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,14 +10,11 @@ import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { Nav } from "react-bootstrap";
 
 class MyCourses extends React.Component {
   constructor() {
     super();
-    this.state = {
-      loggedIn: false,
-      username: null
-    };
 
     this.componentDidMount = this.componentDidMount.bind(this);
   }
@@ -23,19 +22,25 @@ class MyCourses extends React.Component {
   componentDidMount() {
     this.verifyUser()
       .then(res => {
+        console.log(res);
         if (res.status !== 200) {
-          this.props.history.push("/Login");
+          console.log(" up");
+          // this.props.history.push("/Login");
         } else {
           console.log("user logged into MyCourses");
+          // console.log("user: ", res.json());
+          res.json().then(user => {
+            console.log("user: ", user.username);
+            authService.login(user.username);
+          });
         }
       })
       .catch(err => console.log(err));
   }
 
   verifyUser = async () => {
-    console.log("verying user");
     const response = await fetch("/auth/verify");
-
+    // const user = await response.json();
     return response;
   };
 

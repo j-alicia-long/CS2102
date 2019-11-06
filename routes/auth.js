@@ -19,6 +19,7 @@ router.get("/verify", (req, res) => {
     res.send(req.user);
   } else {
     console.log("forbidden");
+    console.log(req.user);
     res.status(404).send(req.user);
   }
 });

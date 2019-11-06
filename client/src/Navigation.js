@@ -1,29 +1,23 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { authService } from "./authService";
 
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      username: ""
+    };
+
     this.logout = this.logout.bind(this);
   }
 
   logout = () => {
-    fetch("/auth/logout").then(
-      // logout
-      this.props.history.push("/Login")
-    );
-  };
-
-  callBackendAPI = async () => {
-    const response = await fetch("/users");
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
+    authService.logout();
+    fetch("/auth/logout").then(this.props.history.push("/Login"));
   };
 
   render() {
@@ -44,7 +38,7 @@ class Navigation extends React.Component {
             <p className="text-center mx-4 mt-3">AY19/20 SEM 1</p>
             <NavDropdown
               className="justify-content-end"
-              title="Student"
+              title={this.state.username}
               id="basic-nav-dropdown"
             >
               <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
