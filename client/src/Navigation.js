@@ -6,7 +6,7 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 class Navigation extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); 
     this.logout = this.logout.bind(this);
   }
 

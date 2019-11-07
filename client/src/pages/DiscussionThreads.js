@@ -9,7 +9,6 @@ class DiscussionThreads extends React.Component {
   render() {
     return (
       <div>
-        <Navbar className="navbar">This is Nav Bar</Navbar>
         <div className="body">
           <CourseNavBar />
           <div className="course-description">
