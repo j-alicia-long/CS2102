@@ -9,14 +9,15 @@ passport.serializeUser((username, done) => {
 });
 
 // user object attaches to the request as req.user
-passport.deserializeUser((username, done) => {
-  findUser(username, done);
+passport.deserializeUser((user, done) => {
+  findUser(user, done);
 });
 
 passport.use(LocalStrategy);
 
-function findUser(username, callback) {
-  pool.query("SELECT * FROM Users WHERE uid = $1", [username], (err, data) => {
+function findUser(user, callback) {
+  console.log("username?", user);
+  pool.query("SELECT * FROM Users WHERE uid = $1", [user.uid], (err, data) => {
     if (err) {
       console.error("Cannot find user");
       return callback(null);
@@ -26,7 +27,6 @@ function findUser(username, callback) {
       console.error("User does not exists?");
       return callback(null);
     } else if (data.rows.length == 1) {
-      console.log("USER FOUND", username);
       return callback(null, {
         username: data.rows[0].uid,
         passwordHash: data.rows[0].pass
