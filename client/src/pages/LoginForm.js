@@ -6,7 +6,7 @@ import { authService } from "../authService";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Form, FormControl, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 class LoginForm extends React.Component {
   constructor(props) {

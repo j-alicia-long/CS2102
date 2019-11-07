@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import CourseNavBar from "./CourseNavBar";
 
-import { Navbar, Button, Card, Nav } from "react-bootstrap";
+import { Button, Card, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 class CourseForum extends React.Component {

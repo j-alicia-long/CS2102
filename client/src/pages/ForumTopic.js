@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import CourseNavBar from "./CourseNavBar";
 
-import { Navbar, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 class ForumTopic extends React.Component {
