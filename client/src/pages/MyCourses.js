@@ -1,15 +1,45 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import { authService } from "../authService";
 
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { Nav } from "react-bootstrap";
 
 class MyCourses extends React.Component {
+  constructor() {
+    super();
+  }
+
+  // componentDidMount() {
+  //   this.verifyUser()
+  //     .then(res => {
+  //       console.log(res);
+  //       if (res.status !== 200) {
+  //         console.log(" up");
+  //       } else {
+  //         console.log("user logged into MyCourses");
+  //         // console.log("user: ", res.json());
+  //         res.json().then(user => {
+  //           console.log("user: ", user.username);
+  //           authService.login(user.username);
+  //         });
+  //       }
+  //     })
+  //     .catch(err => console.log(err));
+  // }
+
+  // verifyUser = async () => {
+//   const response = await fetch("/auth[/verify]");
+  //   // const user = await response.json();
+  //   return response;
+  // };
 
   render() {
     return (
@@ -47,4 +77,4 @@ class MyCourses extends React.Component {
   }
 }
 
-export default MyCourses;
+export default withRouter(MyCourses);
