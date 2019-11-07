@@ -91,22 +91,30 @@
 }
 
 /* StudentList */
-.student-group {
-  margin-top: 50px;
-  width: 100%;
-}
-
 .student-list {
   width: 100%;
   height: 200px;
 }
 
-.bg-circle {
-  background-color: rgb(194, 189, 189);
+.student-div {
+  width: 200px;
+  height: 170px;
+  margin-left: 0%;
 }
 
 .student-info {
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-icon {
   width: 100px;
   height: 100px;
-  margin: 20px;
+}
+
+.nav-groups {
+  display: flex;
+  flex-direction: row;
+  margin: 30px auto;
 }
