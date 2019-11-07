@@ -87,7 +87,7 @@ const deleteCourse = (req, res) => {
 const getStudentsInCourse = (req, res) => {
   const id = req.params.id;
   const { yearsem } = req.body;
-  //sd
+
   pool.query(
     'SELECT uid FROM Selects WHERE cid = $1 AND yearsem = $2',
     [id, yearsem],

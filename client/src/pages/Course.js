@@ -1,21 +1,53 @@
-import React from "react";
-import "../App.css";
-import CourseNavBar from "./CourseNavBar";
+import React from 'react';
+import '../App.css';
+import CourseNavBar from './CourseNavBar';
 
-import { Navbar, Button, ListGroup } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
+import { Button, ListGroup } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class Course extends React.Component {
+  state = {
+    login: false,
+    course_details: []
+  };
+
+  componentDidMount() {
+    this.fetchCurrentCourse()
+      .then(res => {
+        this.setState({ course_details: res });
+      })
+      .catch(err => console.log(err));
+  }
+
+  fetchCurrentCourse = async () => {
+    const c_code = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/courses/' + c_code);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    console.log('RESPONSE SUCCESS: ', body);
+    return body;
+  };
+
   render() {
     return (
       <div>
-        <Navbar className="navbar">This is Nav Bar</Navbar>
         <div className="body">
           <CourseNavBar />
           <div className="course-description">
             <div>
-              <h1>DATABASE SYSTEMS</h1>
-              <h3 style={{ textAlign: "left" }}> CS2102</h3>
+              {this.state.course_details.map(course => (
+                <div>
+                  <h1 key={course.name} style={{ textTransform: 'uppercase' }}>
+                    {course.name}
+                  </h1>
+                  <h3 key={course.cid} style={{ textAlign: 'left' }}>
+                    {course.cid}
+                  </h3>
+                </div>
+              ))}
             </div>
             <div className="join-button">
               <Button className="btn-lg">Join</Button>
