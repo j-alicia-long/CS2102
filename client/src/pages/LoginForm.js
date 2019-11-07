@@ -24,23 +24,27 @@ class LoginForm extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = async event => {
     event.preventDefault();
-    fetch("/auth/login", {
+
+    const response = await fetch("/auth/login", {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: {
         "Content-Type": "application/json"
       }
-    }).then(res => {
-      if (res.status === 200) {
-        authService.login("YAY");
-        this.props.history.push("/MyCourses");
-      } else {
-        alert("Error logging in please try again");
-      }
     });
-  }
+
+    const token = await response.json().catch(() => {
+      alert("Wrong username and/or password!");
+    });
+    if (token) {
+      authService.login(token);
+      console.log("redirecting");
+      this.props.history.push("/MyCourses");
+    }
+  };
+
   render() {
     return (
       <Container>

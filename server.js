@@ -13,12 +13,12 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(cors());
+app.use(cookieParser());
 
 app.use(
   session({
-    secret: "process.env.SECRET",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
   })

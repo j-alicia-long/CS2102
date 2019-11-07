@@ -3,9 +3,9 @@ import { authService } from "./authService";
 import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isLoggedIn = authService.isLoggedIn;
+  const isLoggedIn = authService.loggedIn();
 
-  console.log("islog", isLoggedIn);
+  console.log("isLoggedIn: ", isLoggedIn);
 
   return (
     <Route

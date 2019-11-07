@@ -15,34 +15,31 @@ import { Nav } from "react-bootstrap";
 class MyCourses extends React.Component {
   constructor() {
     super();
-
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  componentDidMount() {
-    this.verifyUser()
-      .then(res => {
-        console.log(res);
-        if (res.status !== 200) {
-          console.log(" up");
-          // this.props.history.push("/Login");
-        } else {
-          console.log("user logged into MyCourses");
-          // console.log("user: ", res.json());
-          res.json().then(user => {
-            console.log("user: ", user.username);
-            authService.login(user.username);
-          });
-        }
-      })
-      .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   this.verifyUser()
+  //     .then(res => {
+  //       console.log(res);
+  //       if (res.status !== 200) {
+  //         console.log(" up");
+  //       } else {
+  //         console.log("user logged into MyCourses");
+  //         // console.log("user: ", res.json());
+  //         res.json().then(user => {
+  //           console.log("user: ", user.username);
+  //           authService.login(user.username);
+  //         });
+  //       }
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
-  verifyUser = async () => {
-    const response = await fetch("/auth/verify");
-    // const user = await response.json();
-    return response;
-  };
+  // verifyUser = async () => {
+//   const response = await fetch("/auth[/verify]");
+  //   // const user = await response.json();
+  //   return response;
+  // };
 
   render() {
     return (

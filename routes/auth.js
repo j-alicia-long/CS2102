@@ -1,10 +1,22 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const passport = require("../passport");
-
 const router = express.Router();
 
+const secret = "secret"; // TODO: put in env
+
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.send(req.user);
+  // user is valid
+  console.log("user valid");
+  const user = req.user;
+  const payload = { user };
+  const token = jwt.sign(payload, secret, {
+    expiresIn: "1h"
+  });
+  res
+    .cookie("token", token, { httpOnly: true })
+    .status(200)
+    .send({ token: token });
 });
 
 router.get("/logout", (req, res) => {
@@ -16,11 +28,11 @@ router.get("/logout", (req, res) => {
 router.get("/verify", (req, res) => {
   if (req.isAuthenticated()) {
     console.log("authorised");
-    res.send(req.user);
+    res.send({ user: req.user });
   } else {
     console.log("forbidden");
     console.log(req.user);
-    res.status(404).send(req.user);
+    res.status(404).send({ user: req.user });
   }
 });
 

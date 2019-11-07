@@ -1,15 +1,25 @@
-export const authService = {
-  isLoggedIn: false,
-  username: "",
-  login(username) {
-    this.isLoggedIn = true;
-    this.username = username;
-    console.log("is logged: ", this.isLoggedIn);
+import jwtDecode from "jwt-decode";
 
-    console.log(username, "auth");
+export const authService = {
+  login(token) {
+    localStorage.setItem("token", token.token);
+    const decoded = jwtDecode(token.token);
+    this.username = decoded.user;
   },
   logout() {
-    this.isLoggedIn = false;
+    localStorage.removeItem("token");
     this.username = "";
+  },
+  loggedIn() {
+    return localStorage.getItem("token") !== null;
+  },
+  getUsername() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return "";
+    }
+    console.log("local storage token: ", token);
+    const decoded = jwtDecode(token);
+    return decoded.user;
   }
 };
