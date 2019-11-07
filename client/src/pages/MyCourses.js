@@ -1,15 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-import Accordion from 'react-bootstrap/Accordion'
+import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from 'react-router-dom';
 
 class MyCourses extends React.Component {
+  handleClick(c_code) {
+    const code = c_code;
+    localStorage.setItem('course_code', JSON.stringify(code));
+  }
 
   render() {
     return (
@@ -21,23 +26,31 @@ class MyCourses extends React.Component {
             <Accordion>
               <Card>
                 <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                    CS2102 - Databases
-                  </Accordion.Toggle>
+                  <Link to="/Course">
+                    <Accordion.Toggle
+                      as={Button}
+                      variant="link"
+                      eventKey="1"
+                      onClick={() => this.handleClick('EE3333')}
+                    >
+                      EE3333 - Systems and Signals
+                    </Accordion.Toggle>
+                  </Link>
                 </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>Hello! I'm the body</Card.Body>
-                </Accordion.Collapse>
               </Card>
               <Card>
                 <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                    CS2106 - Operating Systems
-                  </Accordion.Toggle>
+                  <Link to="/Course">
+                    <Accordion.Toggle
+                      as={Button}
+                      variant="link"
+                      eventKey="1"
+                      onClick={() => this.handleClick('CS2222')}
+                    >
+                      CS2222 - Database Systems
+                    </Accordion.Toggle>
+                  </Link>
                 </Card.Header>
-                <Accordion.Collapse eventKey="1">
-                  <Card.Body>Hello! I'm another body</Card.Body>
-                </Accordion.Collapse>
               </Card>
             </Accordion>
           </Col>

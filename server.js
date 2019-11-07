@@ -15,6 +15,7 @@ app.use(cors());
 app.use('/users', routes.users);
 app.use('/students', routes.students);
 app.use('/courses', routes.courses);
+app.use('/facilitators', routes.facilitators);
 
 // Serves the client when deployed in production
 if (process.env.NODE_ENV === 'production') {
