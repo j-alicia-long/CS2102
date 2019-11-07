@@ -9,6 +9,8 @@ import StudentList from './pages/StudentList';
 import CourseForum from './pages/CourseForum';
 import ForumTopic from './pages/ForumTopic';
 import DiscussionThreads from './pages/DiscussionThreads'
+import NewForumEntry from './pages/NewForumEntry'
+
 
 
 class App extends React.Component {
@@ -51,6 +53,7 @@ class App extends React.Component {
           <Route exact path="/CourseForum" component={CourseForum} />
           <Route exact path="/ForumTopic" component={ForumTopic} />
           <Route exact path="/DiscussionThreads" component={DiscussionThreads} />
+          <Route exact path="/NewForumEntry" component={NewForumEntry} />
         </Switch>
       </Router>
     );

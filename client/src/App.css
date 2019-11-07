@@ -206,11 +206,12 @@ input.forum-details {
 
 /* DiscussionThreads */
 .thread-layout {
-  margin: 50px auto 100px;
+  margin: 50px auto 1200px;
 }
 
+
 .thread-card {
-  margin: 30px auto;
+  margin: 30px 0px;
   height: 120px;
   text-align: left;
 }
@@ -221,8 +222,8 @@ input.forum-details {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  border: solid;
 }
-
 
 
 .thread-details {
@@ -230,10 +231,10 @@ input.forum-details {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  margin-top: 10px;
 }
 
 .thread-title {
+  margin: 18px 0px 0px 0px;
   text-align: center;
 }
 
@@ -259,7 +260,55 @@ input.forum-details {
   text-align: left;
 }
 
+.num-reply {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  text-align: center;
+}
 
+.num-views {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  text-align: center;
+}
 
+.last-reply-date {
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  text-align: center;
+}
 
+.submit-button{
+  text-align: right;
+}
+
+/*NewForumEntry*/
+
+input.entry-title {
+  display: inline-block;
+  height: 40px;
+  width: 50%;
+  font-size: 25px;
+  color: black;
+}
+
+textarea.entry-post {
+  display: inline-block;
+  width: 80%;
+  height: 100px;
+  margin-top: 20px;
+  font-size: 20px;
+  text-align: top;
+}
+
+input.entry-attach {
+  display: inline-block;
+  width: 60%;
+  height: 40px;
+  font-size: 20px;
+  margin-top: 20px;
+}
 
