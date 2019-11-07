@@ -49,7 +49,7 @@ class Navigation extends React.Component {
               </Navbar.Text>
               <NavDropdown
                 className="justify-content-end"
-                title="Student"
+                title={this.state.username}
                 id="basic-nav-dropdown"
               >
                 <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
