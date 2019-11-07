@@ -1,14 +1,14 @@
-import React from "react";
-import "../App.css";
+import React from 'react';
+import '../App.css';
 
-import { Nav } from "react-bootstrap";
+import { Nav } from 'react-bootstrap';
 
 class CourseNavBar extends React.Component {
   render() {
     return (
       <Nav className="nav rounded">
         <Nav.Item>
-          <Nav.Link className="nav-item" href="/">
+          <Nav.Link className="nav-item" href="/Course">
             Overview
           </Nav.Link>
         </Nav.Item>
