@@ -87,7 +87,7 @@ const deleteCourse = (req, res) => {
 const getStudentsInCourse = (req, res) => {
   const id = req.params.id;
   const { yearsem } = req.body;
-
+  //sd
   pool.query(
     'SELECT uid FROM Selects WHERE cid = $1 AND yearsem = $2',
     [id, yearsem],
@@ -105,17 +105,13 @@ const addStudentToCourse = (req, res) => {
   const cid = req.params.id;
   const { uid, yearsem } = req.body;
 
-  pool.query(
-    'INSERT INTO Selects VALUES ($1, $2, $3)',
-    [uid, cid, yearsem],
-    error => {
-      if (error) {
-        console.error(error);
-        return res.status(400).send('Error adding student to course');
-      }
-      res.status(201).send(`Student successfully added to course`);
+  pool.query('INSERT INTO Selects VALUES ($1, $2, $3)', [uid, cid, yearsem], error => {
+    if (error) {
+      console.error(error);
+      return res.status(400).send('Error adding student to course');
     }
-  );
+    res.status(201).send(`Student successfully added to course`);
+  });
 };
 
 const deleteStudentFromCourse = (req, res) => {
