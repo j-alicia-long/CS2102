@@ -14,6 +14,7 @@ export const authService = {
     return localStorage.getItem("token") !== null;
   },
   getUsername() {
+    // TODO: get user to return user object
     const token = localStorage.getItem("token");
     if (!token) {
       return "";

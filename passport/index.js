@@ -4,23 +4,13 @@ const { pool } = require("../config");
 
 // called on login, saves the id to session req.session.passport.user = {id:'..'}
 passport.serializeUser((username, done) => {
-  console.log("*** serializeUser called, user: ");
   console.log(username);
-  console.log("---------");
   done(null, username);
 });
 
 // user object attaches to the request as req.user
 passport.deserializeUser((username, done) => {
-  console.log("DeserializeUser called");
   findUser(username, done);
-
-  //   User.findOne({ _id: id }, "username", (err, user) => {
-  //     console.log("*** Deserialize user, user:");
-  //     console.log(user);
-  //     console.log("--------------");
-  //     done(null, user);
-  //   });
 });
 
 passport.use(LocalStrategy);
