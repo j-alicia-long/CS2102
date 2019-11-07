@@ -22,7 +22,7 @@ CREATE TABLE Users (
   uid       varchar(50) PRIMARY KEY,
   pass      varchar(256) NOT NULL,
   name      varchar(256) NOT NULL,
-  faculty   varchar(50)  NOT NULL,
+  faculty   varchar(256)  NOT NULL,
   UNIQUE (uid, name)
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE Supervises (
 CREATE TABLE Courses (
   cid       varchar(20),
   yearsem   varchar(20),
-  name      varchar(50),
+  name      varchar(256),
   uid       varchar(50) REFERENCES Professors (uid),
   PRIMARY KEY (cid, yearsem)
 );

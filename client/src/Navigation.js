@@ -6,14 +6,37 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 class Navigation extends React.Component {
   constructor(props) {
-    super(props); 
+    super(props);
+
+    this.state = {
+      name: ""
+    };
+
     this.logout = this.logout.bind(this);
+  }
+
+  componentDidMount() {
+    this.setName();
+  }
+
+  componentDidUpdate() {
+    if (this.state.name) {
+      return;
+    }
+    this.setName();
   }
 
   logout = () => {
     authService.logout();
     fetch("/auth/logout").then(this.props.history.push("/Login"));
   };
+
+  setName() {
+    const user = authService.getUser();
+    if (user) {
+      this.setState({ name: user.name });
+    }
+  }
 
   render() {
     if (authService.loggedIn()) {
@@ -36,7 +59,7 @@ class Navigation extends React.Component {
               </Navbar.Text>
               <NavDropdown
                 className="justify-content-end"
-                title={authService.getUsername()}
+                title={this.state.name}
                 id="basic-nav-dropdown"
               >
                 <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>

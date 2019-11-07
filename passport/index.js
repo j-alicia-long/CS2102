@@ -16,7 +16,6 @@ passport.deserializeUser((user, done) => {
 passport.use(LocalStrategy);
 
 function findUser(user, callback) {
-  console.log("username?", user);
   pool.query("SELECT * FROM Users WHERE uid = $1", [user.uid], (err, data) => {
     if (err) {
       console.error("Cannot find user");
