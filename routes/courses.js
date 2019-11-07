@@ -101,23 +101,6 @@ const getStudentsInCourse = (req, res) => {
   );
 };
 
-const getStudentsInCourse = (req, res) => {
-  const id = req.params.id;
-  const { yearsem } = req.body;
-
-  pool.query(
-    'SELECT uid FROM Selects WHERE cid = $1 AND yearsem = $2',
-    [id, yearsem],
-    (error, results) => {
-      if (error) {
-        console.error(error);
-        return res.status(400).send(`Error fetching selected courses with user ID: ${id}`);
-      }
-      res.status(200).json(results.rows);
-    }
-  );
-};
-
 const addStudentToCourse = (req, res) => {
   const cid = req.params.id;
   const { uid, yearsem } = req.body;
