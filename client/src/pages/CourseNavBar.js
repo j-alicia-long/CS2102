@@ -13,7 +13,7 @@ class CourseNavBar extends React.Component {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="nav-item" href="/Course">
+          <Nav.Link className="nav-item" href="/CourseForum">
             Forum
           </Nav.Link>
         </Nav.Item>
