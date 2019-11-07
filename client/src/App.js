@@ -53,20 +53,23 @@ class App extends React.Component {
             <Route exact path="/StudentList" component={StudentList} />
           </Switch>
         </Router>
-        <h1>USER DATABASE</h1>
-        <div className="App-intro">
-          {this.state.data.map((user, i) => (
-            <div key={`${i}-user`}>
-              <span key={`${i}-name`}>Name: {user.name} | </span>
-              <span key={`${i}-uid`}>uid: {user.uid} | </span>
-              <span key={`${i}-pass`}>pass: {user.pass} | </span>
-              <span key={`${i}-faculty`}>faculty: {user.faculty}</span>
-            </div>
-          ))}
-        </div>
       </div>
     );
   }
 }
 
 export default App;
+
+// For debugging purposes
+//
+// <h1>USER DATABASE</h1>
+// <div className="App-intro">
+//   {this.state.data.map((user, i) => (
+//     <div key={`${i}-user`}>
+//       <span key={`${i}-name`}>Name: {user.name} | </span>
+//       <span key={`${i}-uid`}>uid: {user.uid} | </span>
+//       <span key={`${i}-pass`}>pass: {user.pass} | </span>
+//       <span key={`${i}-faculty`}>faculty: {user.faculty}</span>
+//     </div>
+//   ))}
+// </div>

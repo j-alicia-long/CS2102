@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
 
+
 class Navigation extends React.Component {
 
   render() {
     return (
-      <Navbar bg="light" expand="md">
+      <Navbar collapseOnSelect bg="dark" variant="dark" expand="sm">
         <Navbar.Brand href="/Home">Course Star</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -19,8 +20,8 @@ class Navigation extends React.Component {
               <Nav.Link href="/Search">Search</Nav.Link>
             </Nav.Item>
           </Nav>
-          <Nav className="ml-auto" pullRight>
-            <p className="text-center mx-4 mt-3">AY19/20 SEM 1</p>
+          <Nav>
+            <Navbar.Text className="text-center mx-4 mt-1">AY19/20 SEM 1</Navbar.Text>
             <NavDropdown className="justify-content-end" title="Student" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Help</NavDropdown.Item>
