@@ -7,20 +7,7 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      username: ""
-    };
-
     this.logout = this.logout.bind(this);
-  }
-
-  // todo: not working
-  componentWillReceiveProps() {
-    if (authService.loggedIn()) {
-      console.log("loggedin, setting name: ", authService.getUsername());
-      this.setState({ username: authService.getUsername() });
-    }
   }
 
   logout = () => {
@@ -49,7 +36,7 @@ class Navigation extends React.Component {
               </Navbar.Text>
               <NavDropdown
                 className="justify-content-end"
-                title={this.state.username}
+                title={authService.getUsername()}
                 id="basic-nav-dropdown"
               >
                 <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
