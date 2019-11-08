@@ -1,20 +1,21 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PrivateRoute from './privateRoute';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PrivateRoute from "./privateRoute";
 
-import Navigation from './Navigation';
-import MainPage from './pages/MainPage';
-import LoginPage from './pages/LoginPage';
-import MyCourses from './pages/MyCourses';
-import CourseSearch from './pages/CourseSearch';
-import Course from './pages/Course';
-import FacilitatorList from './pages/FacilitatorList';
-import StudentList from './pages/StudentList';
-import CourseForum from './pages/CourseForum';
-import ForumTopic from './pages/ForumTopic';
-import DiscussionThreads from './pages/DiscussionThreads';
-import NewForumEntry from './pages/NewForumEntry';
+import Navigation from "./Navigation";
+import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
+import MyCourses from "./pages/MyCourses";
+import CourseSearch from "./pages/CourseSearch";
+import Course from "./pages/Course";
+import FacilitatorList from "./pages/FacilitatorList";
+import StudentList from "./pages/StudentList";
+import CourseForum from "./pages/CourseForum";
+import ForumTopic from "./pages/ForumTopic";
+import DiscussionThreads from "./pages/DiscussionThreads";
+import NewForumEntry from "./pages/NewForumEntry";
+import Account from "./pages/Account";
 
 class App extends React.Component {
   render() {
@@ -25,15 +26,24 @@ class App extends React.Component {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/Home" component={MainPage} />
           <Route exact path="/Login" component={LoginPage} />
+          <PrivateRoute exact path="/Account" component={Account} />
           <PrivateRoute exact path="/MyCourses" component={MyCourses} />
-          <Route exact path="/Search" component={CourseSearch} />
-          <Route exact path="/Course" component={Course} />
-          <Route exact path="/FacilitatorList" component={FacilitatorList} />
-          <Route exact path="/StudentList" component={StudentList} />
-          <Route exact path="/CourseForum" component={CourseForum} />
-          <Route exact path="/ForumTopic" component={ForumTopic} />
-          <Route exact path="/DiscussionThreads" component={DiscussionThreads} />
-          <Route exact path="/NewForumEntry" component={NewForumEntry} />
+          <PrivateRoute exact path="/Search" component={CourseSearch} />
+          <PrivateRoute exact path="/Course" component={Course} />
+          <PrivateRoute
+            exact
+            path="/FacilitatorList"
+            component={FacilitatorList}
+          />
+          <PrivateRoute exact path="/StudentList" component={StudentList} />
+          <PrivateRoute exact path="/CourseForum" component={CourseForum} />
+          <PrivateRoute exact path="/ForumTopic" component={ForumTopic} />
+          <PrivateRoute
+            exact
+            path="/DiscussionThreads"
+            component={DiscussionThreads}
+          />
+          <PrivateRoute exact path="/NewForumEntry" component={NewForumEntry} />
         </Switch>
       </Router>
     );
