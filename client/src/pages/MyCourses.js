@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-import Accordion from 'react-bootstrap/Accordion'
+import CardDeck from 'react-bootstrap/CardDeck'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -14,32 +14,43 @@ class MyCourses extends React.Component {
   render() {
     return (
       <Container>
-        <Row className="mt-4 justify-content-md-center">
-          <Col md="6">
-            <hr />
+        <Row className="mt-4">
+          <Col>
             <h2>My Courses</h2>
-            <Accordion>
-              <Card>
-                <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                    CS2102 - Databases
-                  </Accordion.Toggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>Hello! I'm the body</Card.Body>
-                </Accordion.Collapse>
-              </Card>
-              <Card>
-                <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                    CS2106 - Operating Systems
-                  </Accordion.Toggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="1">
-                  <Card.Body>Hello! I'm another body</Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
+            <hr />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <CardDeck>
+            <Card style={{ width: '18rem' }}>
+              <Button href="/Course" variant="outline-success">
+                <Card.Title>Databases</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">CS2102</Card.Subtitle>
+                <Card.Text>
+                  Professor Oak
+                </Card.Text>
+              </Button>
+            </Card>
+            <Card style={{ width: '18rem' }}>
+              <Button href="/Course" variant="outline-success">
+                <Card.Title>Operating Systems</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">CS2106</Card.Subtitle>
+                <Card.Text>
+                  Professor Maple
+                </Card.Text>
+              </Button>
+            </Card>
+            <Card style={{ width: '18rem' }}>
+              <Button href="/Course" variant="outline-success">
+                <Card.Title>Interaction Design</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">CS3240</Card.Subtitle>
+                <Card.Text>
+                  Professor Willow
+                </Card.Text>
+              </Button>
+            </Card>
+          </CardDeck>
           </Col>
         </Row>
       </Container>
@@ -48,3 +59,13 @@ class MyCourses extends React.Component {
 }
 
 export default MyCourses;
+
+// <Card style={{ width: '18rem' }}>
+//   <Card.Body>
+//     <Card.Title>Databases</Card.Title>
+//     <Card.Subtitle className="mb-2 text-muted">CS2102</Card.Subtitle>
+//     <Card.Text>
+//       Professor
+//     </Card.Text>
+//   </Card.Body>
+// </Card>
