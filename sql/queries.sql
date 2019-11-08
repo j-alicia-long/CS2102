@@ -60,7 +60,7 @@ CREATE TABLE Selects (
   uid       varchar(50) REFERENCES Students (uid),
   cid       varchar(20),
   yearsem   varchar(20),
-  FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem), 
+  FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem),
   PRIMARY KEY (uid, cid, yearsem)
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE Groups (
   cid       varchar(20),
   yearsem   varchar(20),
   FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem)
-      ON DELETE CASCADE 
+      ON DELETE CASCADE
 );
 CREATE TABLE Lectures (
   gid       varchar(50) PRIMARY KEY REFERENCES Groups (gid),
@@ -101,7 +101,7 @@ CREATE TABLE HasGroup (
   gid       varchar(50) REFERENCES Groups (gid),
   l_type    varchar(20),
   FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem)
-      ON DELETE CASCADE, 
+      ON DELETE CASCADE,
   UNIQUE (cid, yearsem, gid),
   PRIMARY KEY (cid, yearsem, gid, l_type)
 );
@@ -150,7 +150,7 @@ CREATE TABLE Forums (
   cid		 varchar(50) NOT NULL,
   yearsem   varchar(20),
   FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem)
-      ON DELETE CASCADE 
+      ON DELETE CASCADE
 );
 
 CREATE TABLE Entries (
@@ -171,9 +171,9 @@ CREATE TABLE HasAccess (
 );
 
 CREATE OR REPLACE PROCEDURE add_student(
-uid varchar(50), 
-pass varchar(256), 
-name varchar(256), 
+uid varchar(50),
+pass varchar(256),
+name varchar(256),
 year integer
 )AS $$
 BEGIN
@@ -183,8 +183,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE PROCEDURE add_professor(
-uid varchar(50), 
-pass varchar(256), 
+uid varchar(50),
+pass varchar(256),
 name varchar(256)
 )AS $$
 BEGIN
@@ -194,19 +194,19 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE PROCEDURE update_faculty(
-uid varchar(50), 
+uid varchar(50),
 faculty varchar(50)
 )AS $$
 BEGIN
  UPDATE Users
- SET Users.faculty = faculty 
+ SET Users.faculty = faculty
  WHERE Users.uid == uid;
 END;
 $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE PROCEDURE assign_TA_to_Group(
-uid varchar(50), 
+uid varchar(50),
 gid varchar(50)
 ) AS $$
 BEGIN
@@ -214,6 +214,58 @@ BEGIN
  INSERT INTO ManagesGroup VALUES (uid, gid);
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE add_lecture(
+gid varchar(50),
+cid varchar(20),
+yearsem varchar(20),
+uid varchar(50),
+Day varchar(20),
+startTime time,
+endTime time,
+venue varchar(256)
+)AS $$
+BEGIN
+ INSERT INTO Groups VALUES (gid, cid, yearsem, uid);
+ INSERT INTO Lectures VALUES (gid, day, startTime, endTime, venue);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE add_tutorial(
+gid varchar(50),
+cid varchar(20),
+yearsem varchar(20),
+uid varchar(50),
+Day varchar(20),
+startTime time,
+endTime time,
+venue varchar(256)
+)AS $$
+BEGIN
+ INSERT INTO Groups VALUES (gid, cid, yearsem, uid);
+ INSERT INTO Lectures VALUES (gid, day, startTime, endTime, venue);
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE add_lab(
+gid varchar(50),
+cid varchar(20),
+yearsem varchar(20),
+uid varchar(50),
+Day varchar(20),
+startTime time,
+endTime time,
+venue varchar(256)
+)AS $$
+BEGIN
+ INSERT INTO Groups VALUES (gid, cid, yearsem, uid);
+ INSERT INTO Lectures VALUES (gid, day, startTime, endTime, venue);
+END;
+$$ LANGUAGE plpgsql;
+
+
+--TRIGGERS
 
 CREATE OR REPLACE FUNCTION not_student()
 RETURNS TRIGGER AS $$
@@ -228,52 +280,36 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE add_lecture(
-gid varchar(50), 
-cid varchar(20), 
-yearsem varchar(20), 
-uid varchar(50),
-Day varchar(20),
-startTime time,
-endTime time,
-venue varchar(256) 
-)AS $$
+CREATE OR REPLACE FUNCTION is_student()
+RETURNS TRIGGER AS $$
+DECLARE count NUMERIC;
 BEGIN
- INSERT INTO Groups VALUES (gid, cid, yearsem, uid);
- INSERT INTO Lectures VALUES (gid, day, startTime, endTime, venue);
+ SELECT COUNT(*) INTO count FROM Selects WHERE NEW.uid != Students.uid;
+ IF count > 0 THEN
+ 	RETURN NULL; -- prevent
+ ELSE
+ 	RETURN NEW; -- allow
+ END IF;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE PROCEDURE add_tutorial(
-gid varchar(50), 
-cid varchar(20), 
-yearsem varchar(20), 
-uid varchar(50),
-Day varchar(20),
-startTime time,
-endTime time,
-venue varchar(256) 
-)AS $$
+CREATE TRIGGER check_enrolled_user()
+BEFORE INSERT OR UPDATE ON Selects
+FOR EACH ROW EXECUTE PROCEDURE is_student();
+
+CREATE OR REPLACE FUNCTION is_professor()
+RETURNS TRIGGER AS $$
+DECLARE count NUMERIC;
 BEGIN
- INSERT INTO Groups VALUES (gid, cid, yearsem, uid);
- INSERT INTO Lectures VALUES (gid, day, startTime, endTime, venue);
+ SELECT COUNT(*) INTO count FROM Courses WHERE NEW.uid != Professors.uid;
+ IF count > 0 THEN
+ 	RETURN NULL; -- prevent
+ ELSE
+ 	RETURN NEW; -- allow
+ END IF;
 END;
 $$ LANGUAGE plpgsql;
 
-
-CREATE OR REPLACE PROCEDURE add_lab(
-gid varchar(50), 
-cid varchar(20), 
-yearsem varchar(20), 
-uid varchar(50),
-Day varchar(20),
-startTime time,
-endTime time,
-venue varchar(256) 
-)AS $$
-BEGIN
- INSERT INTO Groups VALUES (gid, cid, yearsem, uid);
- INSERT INTO Lectures VALUES (gid, day, startTime, endTime, venue);
-END;
-$$ LANGUAGE plpgsql;
-
+CREATE TRIGGER check_course_manager()
+BEFORE INSERT OR UPDATE ON Courses
+FOR EACH ROW EXECUTE PROCEDURE is_professor();
