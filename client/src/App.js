@@ -21,39 +21,29 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Navigation></Navigation>
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route exact path="/Home" component={MainPage} />
-          <Route exact path="/Login" component={LoginPage} />
-          <Route exact path="/CourseBrowse" component={CourseBrowse} />
-          <PrivateRoute exact path="/MyCourses" component={MyCourses} />
-          <Route exact path="/Search" component={SearchPage} />
-          <Route exact path="/Course" component={Course} />
-          <Route exact path="/FacilitatorList" component={FacilitatorList} />
-          <Route exact path="/StudentList" component={StudentList} />
-          <Route exact path="/CourseForum" component={CourseForum} />
-          <Route exact path="/ForumTopic" component={ForumTopic} />
-          <Route exact path="/DiscussionThreads" component={DiscussionThreads} />
-          <Route exact path="/NewForumEntry" component={NewForumEntry} />
-        </Switch>
+        <div>
+          <Navigation/>
+        </div>
+        <div>
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+            <Route exact path="/Home" component={MainPage} />
+            <Route exact path="/Login" component={LoginPage} />
+            <Route exact path="/CourseBrowse" component={CourseBrowse} />
+            <PrivateRoute exact path="/MyCourses" component={MyCourses} />
+            <Route exact path="/Search" component={SearchPage} />
+            <Route exact path="/Course" component={Course} />
+            <Route exact path="/FacilitatorList" component={FacilitatorList} />
+            <Route exact path="/StudentList" component={StudentList} />
+            <Route exact path="/CourseForum" component={CourseForum} />
+            <Route exact path="/ForumTopic" component={ForumTopic} />
+            <Route exact path="/DiscussionThreads" component={DiscussionThreads} />
+            <Route exact path="/NewForumEntry" component={NewForumEntry} />
+          </Switch>
+        </div>
       </Router>
     );
   }
 }
 
 export default App;
-
-// For debugging purposes
-//
-// <h1>USER DATABASE</h1>
-// <div className="App-intro">
-//   {this.state.data.map((user, i) => (
-//     <div key={`${i}-user`}>
-//       <span key={`${i}-name`}>Name: {user.name} | </span>
-//       <span key={`${i}-uid`}>uid: {user.uid} | </span>
-//       <span key={`${i}-pass`}>pass: {user.pass} | </span>
-//       <span key={`${i}-faculty`}>faculty: {user.faculty}</span>
-//     </div>
-//   ))}
-// </div>

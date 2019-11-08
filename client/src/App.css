@@ -169,15 +169,15 @@
   margin: 25px 0px;
 }
 
-form {
+.new-forum form {
   text-indent: 1.2em;
   padding: 1em;
-  border: 1px solid black;
-  border-radius: 1em;
+  border: 1px solid green;
+  border-radius: 0.5em;
 }
 
 
-label {
+.new-forum label {
   display: inline-block;
   width: 200px;
   text-align: left;
@@ -319,4 +319,3 @@ input.entry-attach {
   font-size: 20px;
   margin-top: 20px;
 }
-

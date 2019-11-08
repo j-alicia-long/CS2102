@@ -19,13 +19,16 @@ class MyCourses extends React.Component {
     return (
       <Container>
         <Row className="mt-4">
-          <Col>
+          <Col className="ml-auto">
             <h2>My Courses</h2>
-            <hr />
+          </Col>
+          <Col xs="2" className="mr-auto">
+            <Button href="/CourseBrowse" variant="secondary">Browse Courses</Button>
           </Col>
         </Row>
         <Row>
           <Col>
+          <hr />
           <CardDeck>
             <Card style={{ width: '18rem' }}>
               <Button href="/Course" onClick={() => this.handleClick("CS2102")} variant="outline-success">

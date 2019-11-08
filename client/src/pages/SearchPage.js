@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -15,6 +16,7 @@ class SearchPage extends React.Component {
     this.state = {
       keyword: 'yooooo',
       selectedOptions: ['Users', 'Courses'],
+      hasSearched: false,
       displayUserResults: false,
       displayCourseResults: false,
       userResults: {},
@@ -35,30 +37,42 @@ class SearchPage extends React.Component {
   }
 
   handleSearch(event) {
-    alert('You are searching for: ' + this.state.keyword);
+    // Clear results display
+    this.setState({
+      displayUserResults: false,
+      displayCourseResults: false,
+    });
     var searchOptions = this.state.selectedOptions;
-    var result;
+
     if(searchOptions.includes("Users")){
-      result = this.getUsers(this.state.keyword);
-      console.log(result);
-      this.setState({
-        displayUserResults: true,
-        userResults: result
-      });
+      this.getUsers(this.state.keyword)
+        .then(result => {
+          this.setState({
+            hasSearched: true,
+            displayUserResults: true,
+            userResults: result
+          });
+          console.log(result);
+        })
+        .catch(err => console.log(err));
     }
     if(searchOptions.includes("Courses")){
-      result = this.getCourses(this.state.keyword);
-      console.log(result);
-      this.setState({
-        displayCourseResults: true,
-        courseResults: result
-      });
+      this.getCourses(this.state.keyword)
+        .then(result => {
+          this.setState({
+            hasSearched: true,
+            displayCourseResults: true,
+            courseResults: result
+          });
+          console.log(result);
+        })
+        .catch(err => console.log(err));
     }
     event.preventDefault();
   }
 
   getUsers = async (uid) => {
-    const response = await fetch('/users/'+uid);
+    const response = await fetch('/users/' + uid);
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -66,8 +80,9 @@ class SearchPage extends React.Component {
     }
     return body;
   };
+
   getCourses = async (cid) => {
-    const response = await fetch('/courses/'+cid);
+    const response = await fetch('/courses/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -75,18 +90,24 @@ class SearchPage extends React.Component {
     }
     return body;
   };
+
+  // For redirecting to a course overview page
+  handleClick(c_code) {
+    const code = c_code;
+    localStorage.setItem("course_code", JSON.stringify(code));
+  }
+
 
   render() {
     const allOptions = ['Users', 'Courses'];
-    // console.log(this.state.selectedOptions);
-    // console.log(this.state.keyword);
 
     return (
       <Container className="mt-4">
         <Form>
+          <h3>Search</h3>
           <Form.Group as={Row} controlId="searchKeyword">
-            <Form.Label column sm="2">Search keyword</Form.Label>
-            <Col sm="9">
+            <Form.Label column md="3">Search keyword</Form.Label>
+            <Col md="9">
               <FormControl
                 type="text"
                 placeholder="User ID, Course ID"
@@ -97,8 +118,8 @@ class SearchPage extends React.Component {
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="searchOptions">
-            <Form.Label column sm="2">Search In</Form.Label>
-            <Col sm="9">
+            <Form.Label column md="3">Search In</Form.Label>
+            <Col md="9">
               <ToggleButtonGroup
                 type="checkbox"
                 className="mb-3"
@@ -106,37 +127,57 @@ class SearchPage extends React.Component {
                 onChange={this.handleOptionsChange}
               >
                 {allOptions.map(option => (
-                    <ToggleButton value={option} variant="outline-secondary">
+                    <ToggleButton value={option} variant="outline-success">
                       {option}
                     </ToggleButton>
                 ))}
               </ToggleButtonGroup>
             </Col>
           </Form.Group>
-          <Button onClick={this.handleSearch} variant="outline-success">Search</Button>
+          <Button onClick={this.handleSearch} variant="outline-primary">Search</Button>
+        </Form>
 
-          <hr className="my-4"/>
+        <hr className="my-4"/>
 
+        {this.state.hasSearched ? (
           <Row className="p-2">
             <h3>Search Results</h3>
           </Row>
+        ) : (<div></div>)}
+
+        {this.state.displayUserResults ? (
           <Row className="p-2">
-            {this.state.displayUserResults ? (
-              <div>
-                <h5>Users</h5>
-                <p>TBD</p>
-              </div>
-            ) : (<div></div>)}
+            <Col sm="3"><h5>Users</h5></Col>
+            <Col>
+              {(this.state.userResults.length == 0) ? (
+                 <p>No results found</p>
+              ) : (
+                this.state.userResults.map((user) => (
+                  <p>{user.uid}: {user.name}</p>
+                ))
+              )}
+            </Col>
           </Row>
+        ) : (<div></div>)}
+
+        {this.state.displayCourseResults ? (
           <Row className="p-2">
-            {this.state.displayCourseResults ? (
-              <div>
-                <h5>Courses</h5>
-                <p>TBD</p>
-              </div>
-            ) : (<div></div>)}
+            <Col sm="3"><h5>Courses</h5></Col>
+            <Col>
+              {(this.state.courseResults.length == 0) ? (
+                 <p>No results found</p>
+              ) : (
+                this.state.courseResults.map((course) => (
+                  <Link to="/Course"
+                    onClick={() => this.handleClick(course.cid)}>
+                    {course.cid}: {course.name}
+                  </Link>
+                ))
+              )}
+            </Col>
           </Row>
-        </Form>
+        ) : (<div></div>)}
+
       </Container>
     );
   }

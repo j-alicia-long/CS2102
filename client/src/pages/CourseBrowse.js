@@ -11,6 +11,30 @@ import Button from 'react-bootstrap/Button';
 
 
 class CourseBrowse extends React.Component {
+  state = {
+    data: []
+  };
+
+  componentDidMount() {
+    // Call our fetch function below once the component mounts
+    this.getCourses()
+      .then(res => {
+        this.setState({ data: res });
+      })
+      .catch(err => console.log(err));
+  }
+
+  // Fetches our GET route from the Express server.
+  getCourses = async () => {
+    const response = await fetch('/courses/');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
+
   handleClick(c_code) {
     const code = c_code;
     localStorage.setItem("course_code", JSON.stringify(code));
@@ -20,42 +44,28 @@ class CourseBrowse extends React.Component {
     return (
       <Container>
         <Row className="mt-4 justify-content-md-center">
-          <Col md="6">
+          <Col md="8">
             <h2>Browse Courses</h2>
             <hr />
-
             <Accordion>
-              <Card>
-                <Card.Header>
-                  <Link to="/Course">
-                    <Accordion.Toggle
-                      as={Button}
-                      variant="link"
-                      eventKey="1"
-                      onClick={() => this.handleClick("EE3333")}
-                    >
-                      EE3333 - Systems and Signals
-                    </Accordion.Toggle>
-                  </Link>
-                </Card.Header>
-              </Card>
-              <Card>
-                <Card.Header>
-                  <Link to="/Course">
-                    <Accordion.Toggle
-                      as={Button}
-                      variant="link"
-                      eventKey="1"
-                      onClick={() => this.handleClick("CS2222")}
-                    >
-                      CS2222 - Database Systems
-                    </Accordion.Toggle>
-                  </Link>
-                </Card.Header>
-              </Card>
+              {this.state.data.map((course, i) => (
+                <Card>
+                  <Accordion.Toggle as={Card.Header} eventKey={i}>
+                    <h6>{course.cid}: {course.name}</h6>
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey={i}>
+                    <Card.Body>
+                      <p>Semester: {course.yearsem}</p>
+                      <p>Professor ID: {course.uid}</p>
+                      <Link to="/Course"
+                        onClick={() => this.handleClick(course.cid)}>
+                        Go to course overview
+                      </Link>
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              ))}
             </Accordion>
-
-            <Link to="/Course">Go to course overview</Link>
 
           </Col>
         </Row>
@@ -65,3 +75,17 @@ class CourseBrowse extends React.Component {
 }
 
 export default CourseBrowse;
+
+// For debugging purposes
+//
+// <h1>USER DATABASE</h1>
+// <div className="App-intro">
+//   {this.state.data.map((user, i) => (
+//     <div key={`${i}-user`}>
+//       <span key={`${i}-name`}>Name: {user.name} | </span>
+//       <span key={`${i}-uid`}>uid: {user.uid} | </span>
+//       <span key={`${i}-pass`}>pass: {user.pass} | </span>
+//       <span key={`${i}-faculty`}>faculty: {user.faculty}</span>
+//     </div>
+//   ))}
+// </div>
