@@ -1,18 +1,18 @@
-import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 class MyCourses extends React.Component {
-  handleClick(c_code) {
-    const code = c_code;
-    localStorage.setItem("course_code", JSON.stringify(code));
+  handleClick(cid, yearsem) {
+    localStorage.setItem('course_code', JSON.stringify(cid));
+    localStorage.setItem('year_sem', JSON.stringify(yearsem));
   }
 
   render() {
@@ -30,7 +30,7 @@ class MyCourses extends React.Component {
                       as={Button}
                       variant="link"
                       eventKey="1"
-                      onClick={() => this.handleClick("EE3333")}
+                      onClick={() => this.handleClick('EE3333', '2019-01')}
                     >
                       EE3333 - Systems and Signals
                     </Accordion.Toggle>
@@ -44,7 +44,7 @@ class MyCourses extends React.Component {
                       as={Button}
                       variant="link"
                       eventKey="1"
-                      onClick={() => this.handleClick("CS2222")}
+                      onClick={() => this.handleClick('CS2222', '2019-01')}
                     >
                       CS2222 - Database Systems
                     </Accordion.Toggle>

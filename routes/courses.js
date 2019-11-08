@@ -39,6 +39,19 @@ const getCourseById = (req, res) => {
   });
 };
 
+const checkEnrolStatus = (req, res) => {
+  const cid = req.params.cid;
+  const uid = req.params.uid;
+  pool.query('SELECT * FROM Selects WHERE cid = $1 AND uid = $2', [cid, uid], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(400).send('Error fetching enrolment status');
+    }
+    const Enrolment = filterCourses(req.query, results.rows);
+    res.status(200).json(Enrolment);
+  });
+};
+
 const addCourse = (req, res) => {
   const { cid, yearsem, name, uid } = req.body;
 
@@ -135,6 +148,8 @@ const deleteStudentFromCourse = (req, res) => {
 router.get('', getCourses);
 router.get('/:id', getCourseById);
 router.get('/:id/students', getStudentsInCourse);
+router.get('/checkstatus/:cid/:uid', checkEnrolStatus);
+
 router.post('', addCourse);
 router.post('/:id/students', addStudentToCourse);
 router.put('/:id', updateCourse);
