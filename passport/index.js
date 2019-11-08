@@ -2,13 +2,11 @@ const passport = require("passport");
 const LocalStrategy = require("./localStrategy");
 const { pool } = require("../config");
 
-// called on login, saves the id to session req.session.passport.user = {id:'..'}
 passport.serializeUser((username, done) => {
   console.log(username);
   done(null, username);
 });
 
-// user object attaches to the request as req.user
 passport.deserializeUser((user, done) => {
   findUser(user, done);
 });
@@ -27,8 +25,7 @@ function findUser(user, callback) {
       return callback(null);
     } else if (data.rows.length == 1) {
       return callback(null, {
-        username: data.rows[0].uid,
-        passwordHash: data.rows[0].pass
+        username: data.rows[0].uid
       });
     } else {
       console.error("More than one user?");

@@ -9,21 +9,22 @@ class Navigation extends React.Component {
     super(props);
 
     this.state = {
-      name: ""
+      name: "",
+      userId: ""
     };
 
     this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
-    this.setName();
+    this.setUserInfo();
   }
 
   componentDidUpdate() {
     if (this.state.name) {
       return;
     }
-    this.setName();
+    this.setUserInfo();
   }
 
   logout = () => {
@@ -31,10 +32,10 @@ class Navigation extends React.Component {
     fetch("/auth/logout").then(this.props.history.push("/Login"));
   };
 
-  setName() {
+  setUserInfo() {
     const user = authService.getUser();
     if (user) {
-      this.setState({ name: user.name });
+      this.setState({ name: user.name, userId: user.uid });
     }
   }
 
@@ -43,9 +44,13 @@ class Navigation extends React.Component {
       return (
         <Navbar collapseOnSelect bg="dark" variant="dark" expand="sm">
           <Navbar.Brand href="/Home">
-            <img src={require('./logo.png')} width="30" height="30"
-              className="d-inline-block align-top"/>
-            {' Course Star'}
+            <img
+              src={require("./logo.png")}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />
+            {" Course Star"}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -59,7 +64,7 @@ class Navigation extends React.Component {
             </Nav>
             <Nav>
               <Navbar.Text className="text-center mx-4 mt-1">
-                AY19/20 SEM 1
+                {this.state.userId}
               </Navbar.Text>
               <NavDropdown
                 className="justify-content-end"
@@ -77,14 +82,17 @@ class Navigation extends React.Component {
           </Navbar.Collapse>
         </Navbar>
       );
-    }
-    else {
+    } else {
       return (
         <Navbar collapseOnSelect bg="dark" variant="dark" expand="sm">
           <Navbar.Brand href="/Home">
-            <img src={require('./logo.png')} width="30" height="30"
-              className="d-inline-block align-top"/>
-            {' Course Star'}
+            <img
+              src={require("./logo.png")}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />
+            {" Course Star"}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
