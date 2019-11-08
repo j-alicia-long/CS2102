@@ -14,7 +14,7 @@ class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: 'yooooo',
+      keyword: '',
       selectedOptions: ['Users', 'Courses'],
       hasSearched: false,
       displayUserResults: false,

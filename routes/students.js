@@ -69,8 +69,10 @@ const deleteStudent = (req, res) => {
 
 const getStudentsSelectedCourses = (req, res) => {
   const id = req.params.id;
-
-  pool.query('SELECT cid, yearsem FROM Selects WHERE uid = $1', [id], (error, results) => {
+  pool.query(
+    'SELECT * FROM Courses WHERE cid IN (SELECT cid FROM Selects WHERE uid = $1)',
+    [id],
+  (error, results) => {
     if (error) {
       console.error(error);
       return res.status(400).send(`Error fetching selected courses with student ID: ${id}`);

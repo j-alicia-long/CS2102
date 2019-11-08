@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-
 import { authService } from "../authService";
 
 import Container from "react-bootstrap/Container";
@@ -47,9 +46,10 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <Container style={{'border':'1px solid green', 'border-radius':'0.5em'}}>
+      <Container>
         <Row className="mt-4 justify-content-md-center">
-          <Col md="auto">
+          <Col lg="auto" className="p-4"
+            style={{'border':'1px solid grey', 'border-radius':'0.5em'}}>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>NUSNET ID</Form.Label>
