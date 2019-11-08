@@ -47,7 +47,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{'border':'1px solid green', 'border-radius':'0.5em'}}>
         <Row className="mt-4 justify-content-md-center">
           <Col md="auto">
             <Form onSubmit={this.handleSubmit}>
@@ -56,7 +56,7 @@ class LoginForm extends React.Component {
                 <Form.Control
                   name="username"
                   type="text"
-                  placeholder="Ex. E00xxxx"
+                  placeholder="Ex. A00000xx"
                   onChange={this.handleChange}
                 />
               </Form.Group>

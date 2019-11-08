@@ -1,13 +1,13 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import CardDeck from 'react-bootstrap/CardDeck'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 class MyCourses extends React.Component {
   handleClick(c_code) {
@@ -18,40 +18,46 @@ class MyCourses extends React.Component {
   render() {
     return (
       <Container>
-        <Row className="mt-4 justify-content-md-center">
-          <Col md="6">
-            <hr />
+        <Row className="mt-4">
+          <Col className="ml-auto">
             <h2>My Courses</h2>
-            <Accordion>
-              <Card>
-                <Card.Header>
-                  <Link to="/Course">
-                    <Accordion.Toggle
-                      as={Button}
-                      variant="link"
-                      eventKey="1"
-                      onClick={() => this.handleClick("EE3333")}
-                    >
-                      EE3333 - Systems and Signals
-                    </Accordion.Toggle>
-                  </Link>
-                </Card.Header>
-              </Card>
-              <Card>
-                <Card.Header>
-                  <Link to="/Course">
-                    <Accordion.Toggle
-                      as={Button}
-                      variant="link"
-                      eventKey="1"
-                      onClick={() => this.handleClick("CS2222")}
-                    >
-                      CS2222 - Database Systems
-                    </Accordion.Toggle>
-                  </Link>
-                </Card.Header>
-              </Card>
-            </Accordion>
+          </Col>
+          <Col xs="2" className="mr-auto">
+            <Button href="/CourseBrowse" variant="secondary">Browse Courses</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+          <hr />
+          <CardDeck>
+            <Card style={{ width: '18rem' }}>
+              <Button href="/Course" onClick={() => this.handleClick("CS2102")} variant="outline-success">
+                <Card.Title>Databases</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">CS2102</Card.Subtitle>
+                <Card.Text>
+                  Professor Oak
+                </Card.Text>
+              </Button>
+            </Card>
+            <Card style={{ width: '18rem' }}>
+              <Button href="/Course" onClick={() => this.handleClick("CS2106")} variant="outline-success">
+                <Card.Title>Operating Systems</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">CS2106</Card.Subtitle>
+                <Card.Text>
+                  Professor Maple
+                </Card.Text>
+              </Button>
+            </Card>
+            <Card style={{ width: '18rem' }}>
+              <Button href="/Course" onClick={() => this.handleClick("CS3240")} variant="outline-success">
+                <Card.Title>Interaction Design</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">CS3240</Card.Subtitle>
+                <Card.Text>
+                  Professor Willow
+                </Card.Text>
+              </Button>
+            </Card>
+          </CardDeck>
           </Col>
         </Row>
       </Container>
