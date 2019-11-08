@@ -11,6 +11,10 @@ import Button from 'react-bootstrap/Button';
 
 
 class CourseBrowse extends React.Component {
+  handleClick(c_code) {
+    const code = c_code;
+    localStorage.setItem("course_code", JSON.stringify(code));
+  }
 
   render() {
     return (
@@ -19,6 +23,38 @@ class CourseBrowse extends React.Component {
           <Col md="6">
             <h2>Browse Courses</h2>
             <hr />
+
+            <Accordion>
+              <Card>
+                <Card.Header>
+                  <Link to="/Course">
+                    <Accordion.Toggle
+                      as={Button}
+                      variant="link"
+                      eventKey="1"
+                      onClick={() => this.handleClick("EE3333")}
+                    >
+                      EE3333 - Systems and Signals
+                    </Accordion.Toggle>
+                  </Link>
+                </Card.Header>
+              </Card>
+              <Card>
+                <Card.Header>
+                  <Link to="/Course">
+                    <Accordion.Toggle
+                      as={Button}
+                      variant="link"
+                      eventKey="1"
+                      onClick={() => this.handleClick("CS2222")}
+                    >
+                      CS2222 - Database Systems
+                    </Accordion.Toggle>
+                  </Link>
+                </Card.Header>
+              </Card>
+            </Accordion>
+
             <Link to="/Course">Go to course overview</Link>
 
           </Col>

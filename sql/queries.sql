@@ -10,6 +10,9 @@ DROP TABLE IF EXISTS LECTURES CASCADE;
 DROP TABLE IF EXISTS TUTORIALS CASCADE;
 DROP TABLE IF EXISTS LABS CASCADE;
 DROP TABLE IF EXISTS HasGroup CASCADE;
+DROP TABLE IF EXISTS AssignLect CASCADE;
+DROP TABLE IF EXISTS AssignLab CASCADE;
+DROP TABLE IF EXISTS AssignTut CASCADE;
 DROP TABLE IF EXISTS ManagesGroup CASCADE;
 DROP TABLE IF EXISTS Forums CASCADE;
 DROP TABLE IF EXISTS Entries CASCADE;
@@ -19,7 +22,7 @@ CREATE TABLE Users (
   uid       varchar(50) PRIMARY KEY,
   pass      varchar(256) NOT NULL,
   name      varchar(256) NOT NULL,
-  faculty   varchar(50)  NOT NULL,
+  faculty   varchar(256)  NOT NULL,
   UNIQUE (uid, name)
 );
 
@@ -34,7 +37,6 @@ CREATE TABLE TAs (
 
 CREATE TABLE Professors (
   uid       varchar(50) PRIMARY KEY REFERENCES Users (uid),
-  exp		 integer
 );
 
 CREATE TABLE Supervises (
@@ -49,7 +51,7 @@ CREATE TABLE Supervises (
 CREATE TABLE Courses (
   cid       varchar(20),
   yearsem   varchar(20),
-  name      varchar(20),
+  name      varchar(256),
   uid       varchar(50) REFERENCES Professors (uid),
   PRIMARY KEY (cid, yearsem)
 );
@@ -97,9 +99,44 @@ CREATE TABLE HasGroup (
   cid       varchar(20),
   yearsem   varchar(20),
   gid       varchar(50) REFERENCES Groups (gid),
+  l_type    varchar(20),
   FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem)
       ON DELETE CASCADE, 
-  PRIMARY KEY (cid, yearsem, gid)
+  UNIQUE (cid, yearsem, gid),
+  PRIMARY KEY (cid, yearsem, gid, l_type)
+);
+
+CREATE TABLE AssignLect (
+  uid       varchar(50) REFERENCES Students (uid),
+  cid       varchar(20),
+  yearsem   varchar(20),
+  gid       varchar(50),
+  l_type    varchar(20),
+  FOREIGN KEY (cid, yearsem, gid, l_type) REFERENCES HasGroup (cid, yearsem, gid, l_type)
+      ON DELETE CASCADE,
+  PRIMARY KEY (uid, cid, yearsem, l_type)
+);
+
+CREATE TABLE AssignLab (
+  uid       varchar(50) REFERENCES Students (uid),
+  cid       varchar(20),
+  yearsem   varchar(20),
+  gid       varchar(50),
+  l_type    varchar(20),
+  FOREIGN KEY (cid, yearsem, gid, l_type) REFERENCES HasGroup (cid, yearsem, gid, l_type)
+      ON DELETE CASCADE,
+  PRIMARY KEY (uid, cid, yearsem, l_type)
+);
+
+CREATE TABLE AssignTut (
+  uid       varchar(50) REFERENCES Students (uid),
+  cid       varchar(20),
+  yearsem   varchar(20),
+  gid       varchar(50),
+  l_type    varchar(20),
+  FOREIGN KEY (cid, yearsem, gid, l_type) REFERENCES HasGroup (cid, yearsem, gid, l_type)
+      ON DELETE CASCADE,
+  PRIMARY KEY (uid, cid, yearsem, l_type)
 );
 
 CREATE TABLE ManagesGroup (

@@ -8,7 +8,7 @@ import {Form, FormControl, Button, Dropdown} from 'react-bootstrap'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 
-class CourseSearch extends React.Component {
+class SearchPage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -142,7 +142,7 @@ class CourseSearch extends React.Component {
   }
 }
 
-export default CourseSearch;
+export default SearchPage;
 
 
 
