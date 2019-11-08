@@ -24,7 +24,7 @@ CREATE TABLE Users (
   name      varchar(256) NOT NULL,
   faculty   varchar(256)  NOT NULL,
   UNIQUE (uid, name)
-);
+  );
 
 CREATE TABLE Students (
   uid       varchar(50) PRIMARY KEY REFERENCES Users (uid),

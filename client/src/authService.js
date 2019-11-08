@@ -18,7 +18,6 @@ export const authService = {
       return "";
     }
     const decoded = jwtDecode(token);
-    console.log("decoded: ", decoded);
     return decoded;
   }
 };

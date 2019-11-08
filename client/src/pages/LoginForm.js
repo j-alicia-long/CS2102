@@ -73,13 +73,6 @@ class LoginForm extends React.Component {
               <Button variant="primary" type="submit">
                 Submit
               </Button>
-
-              <Form.Group className="mt-4">
-                <Form.Text className="text-muted">
-                  Don't have an account?
-                </Form.Text>
-                <Button variant="secondary">Sign up</Button>
-              </Form.Group>
             </Form>
           </Col>
         </Row>

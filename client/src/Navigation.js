@@ -65,9 +65,9 @@ class Navigation extends React.Component {
                 className="justify-content-end"
                 title={this.state.name}
                 id="basic-nav-dropdown"
+                alignRight
               >
-                <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Help</NavDropdown.Item>
+                <NavDropdown.Item href="/Account">Account</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/Login" onClick={this.logout}>
                   Logout
