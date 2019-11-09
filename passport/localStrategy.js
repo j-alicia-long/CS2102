@@ -19,7 +19,8 @@ const strategy = new LocalStrategy(
             message: "Incorrect username or password"
           });
         }
-        return done(null, username);
+        const user = results.rows[0];
+        return done(null, user);
       }
     );
   }

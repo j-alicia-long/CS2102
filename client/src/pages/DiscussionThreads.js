@@ -106,25 +106,23 @@ class DiscussionThreads extends React.Component {
           <div>
               {this.state.course_details.map(course => (
                 this.state.forum_list.map((forum, i) =>( 
-                  this.state.threads_list.map(threads => (
-                    this.state.entries_list.map(entries => (
                 <div>
                   <h2 key={(course.cid) (`${i}-forum`.f_dscp) } style={{ textAlign: 'left' }}>
                     <a href ="/CourseForum">{course.cid} Forum</a> > FORUM
                   </h2>
                 </div>
-                    )) 
-                  ))
                 ))
               ))}
             </div>
-    
-          <div className="join-button">
-              <Nav.Link href="/NewForumEntry" >
-              <Button className="btn-lg">Start a Discussion Thread</Button>
+
+            <div className="join-button">
+              <Nav.Link href="/NewForumEntry">
+                <Button className="btn-lg">Start a Discussion Thread</Button>
               </Nav.Link>
+            </div>
           </div>
           </div>
+
           <div className = "thread-layout">
             {this.state.threads_list.map( (threads, i) => (
               <h4 style={{ textAlign: "left" , color: "grey"}} key = {`${i}-threads`}>{threads.t_title}</h4>
@@ -132,7 +130,6 @@ class DiscussionThreads extends React.Component {
             <Card className="thread-card">
                {this.state.threads_list.map(threads => ( 
                  this.state.entries_list.map(entries => (
-                   this.state.forum_list.map(forum => (
                     
                 <div className = "thread-description">
                     <p className = "thread-details">
@@ -153,17 +150,14 @@ class DiscussionThreads extends React.Component {
                     <p className = "last-reply-date" key = {entries.e_date}>
                         <h6>{entries.e_date}</h6>
                     </p>
-                    </div>
-                    ))
-                    ))
+                    </div>                    ))
                     ))} 
                     
             </Card>
          </div>
         </div>
-      </div>
     );
-  }
+   }
 }
 
 export default DiscussionThreads;

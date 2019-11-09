@@ -40,34 +40,17 @@ const getStudentById = (req, res) => {
 };
 
 const addStudent = (req, res) => {
-  const { uid, pass, name, faculty } = req.body;
+  const { uid, pass, name, year } = req.body;
 
   pool.query(
-    'INSERT INTO Students (uid, pass, name, faculty) VALUES ($1, $2, $3, $4)',
-    [uid, pass, name, faculty],
+    'CALL add_student ($1, $2, $3, $4)',
+    [uid, pass, name, year],
     error => {
       if (error) {
         console.error(error);
         return res.status(400).send('Error adding student');
       }
       res.status(201).send(`Student successfully added`);
-    }
-  );
-};
-
-const updateStudent = (req, res) => {
-  const { pass, name, faculty } = req.body;
-  const id = req.params.id;
-
-  pool.query(
-    'UPDATE Students SET pass = $1, name = $2, faculty = $3 WHERE uid = $4',
-    [pass, name, faculty, id],
-    error => {
-      if (error) {
-        console.error(error);
-        return res.status(400).send('Error updating student');
-      }
-      res.status(201).send(`Student successfully updated`);
     }
   );
 };
@@ -86,8 +69,10 @@ const deleteStudent = (req, res) => {
 
 const getStudentsSelectedCourses = (req, res) => {
   const id = req.params.id;
-
-  pool.query('SELECT cid, yearsem FROM Selects WHERE uid = $1', [id], (error, results) => {
+  pool.query(
+    'SELECT * FROM Courses WHERE cid IN (SELECT cid FROM Selects WHERE uid = $1)',
+    [id],
+  (error, results) => {
     if (error) {
       console.error(error);
       return res.status(400).send(`Error fetching selected courses with student ID: ${id}`);
@@ -149,7 +134,6 @@ router.get('', getStudents);
 router.get('/:id', getStudentById);
 router.get('/:id/courses', getStudentsSelectedCourses);
 router.post('', addStudent);
-router.put('/:id', updateStudent);
 router.delete('/:id', deleteStudent);
 
 router.get('/all/:c_code', getAllStudentsInCourse);

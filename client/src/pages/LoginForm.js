@@ -1,12 +1,11 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-
 import { authService } from "../authService";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Form, FormControl, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -49,14 +48,15 @@ class LoginForm extends React.Component {
     return (
       <Container>
         <Row className="mt-4 justify-content-md-center">
-          <Col md="auto">
+          <Col lg="auto" className="p-4"
+            style={{'border':'1px solid grey', 'border-radius':'0.5em'}}>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>NUSNET ID</Form.Label>
                 <Form.Control
                   name="username"
                   type="text"
-                  placeholder="Ex. E00xxxx"
+                  placeholder="Ex. A00000xx"
                   onChange={this.handleChange}
                 />
               </Form.Group>
@@ -73,13 +73,6 @@ class LoginForm extends React.Component {
               <Button variant="primary" type="submit">
                 Submit
               </Button>
-
-              <Form.Group className="mt-4">
-                <Form.Text className="text-muted">
-                  Don't have an account?
-                </Form.Text>
-                <Button variant="secondary">Sign up</Button>
-              </Form.Group>
             </Form>
           </Col>
         </Row>

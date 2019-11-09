@@ -7,9 +7,9 @@ const secret = "secret"; // TODO: put in env
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   // user is valid
-  console.log("user valid");
   const user = req.user;
-  const payload = { user };
+  const payload = req.user;
+  console.log("payload: ", payload);
   const token = jwt.sign(payload, secret, {
     expiresIn: "1h"
   });
