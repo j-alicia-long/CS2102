@@ -58,7 +58,7 @@ class Course extends React.Component {
     const uid = authService.getUsername();
     const response = await fetch('/facilitators/check_facil/' + uid);
     const body = await response.json();
-    console.log(body);
+
     if (response.status !== 200) {
       throw Error(body.message);
     }

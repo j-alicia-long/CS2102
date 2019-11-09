@@ -318,3 +318,20 @@ input.entry-attach {
   font-size: 20px;
   margin-top: 20px;
 }
+
+/* ManageStudent */
+.lesson-row {
+  margin: 15px auto;
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+}
+
+.lesson-info {
+  margin: auto 100px auto 0;
+  width: 500px;
+}
+
+.te {
+  text-decoration: line-through;
+}

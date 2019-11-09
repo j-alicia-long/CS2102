@@ -55,32 +55,41 @@ class StudentList extends React.Component {
   }
 
   fetchAllList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/all/' + c_code);
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/all/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message);
     }
-    console.log('RESPONSE SUCCESS All: ', body);
     return body;
   };
 
   fetchLectureList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/lecture/' + c_code);
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/lecture/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message);
     }
-    console.log('RESPONSE SUCCESS Lect: ', body);
     return body;
   };
 
   fetchLabList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/lab/' + c_code);
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/lab/' + cid);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
+
+  fetchTutList = async () => {
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/tutorial/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -93,18 +102,6 @@ class StudentList extends React.Component {
     const uid = authService.getUsername();
     const response = await fetch('/facilitators/check_prof/' + uid);
     const body = await response.json();
-    console.log(body);
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
-
-  fetchTutList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/tutorial/' + c_code);
-    const body = await response.json();
-
     if (response.status !== 200) {
       throw Error(body.message);
     }
@@ -179,7 +176,7 @@ class StudentList extends React.Component {
             </div>
             {this.state.is_a_prof ? (
               <Link to="/ManageStudent" className="join-button manage-btn">
-                <button type="button" className="btn btn-info ">
+                <button type="button" className="btn btn-info">
                   Manage Group
                 </button>
               </Link>
