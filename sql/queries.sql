@@ -150,18 +150,31 @@ CREATE TABLE Forums (
   fid       varchar(50) PRIMARY KEY,
   cid		 varchar(50) NOT NULL,
   yearsem   varchar(20),
+  f_title VARCHAR(50),
+  f_dscp varchar(100),
+  f_date DATE NOT NULL,
   FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem)
       ON DELETE CASCADE 
 );
+
+CREATE TABLE Threads (
+  thid INTEGER PRIMARY KEY,
+  t_title VARCHAR(50),
+  uid VARCHAR(50) REFERENCES Users (uid),
+  t_date DATE NOT NULL,
+  t_views INTEGER,
+  e_date DATE NOT NULL,
+)
 
 CREATE TABLE Entries (
   eid       varchar(50),
   fid       varchar(50) REFERENCES Forums (fid) ON DELETE CASCADE,
   uid       varchar(50) REFERENCES Users (uid),
-  content	 varchar(500) NOT NULL,
-  title     varchar(50)  NOT NULL,
-  date	 date			NOT NULL,
-  time      time	        NOT NULL,
+  e_post	 varchar(500) NOT NULL,
+  e_title  varchar(50)  NOT NULL,
+  e_date	 date			NOT NULL,
+  e_time   time	    NOT NULL,
+  num_e INTEGER,
   PRIMARY KEY (eid, fid, uid)
 );
 
@@ -172,10 +185,10 @@ CREATE TABLE HasAccess (
 );
 
 CREATE OR REPLACE PROCEDURE add_student(
-uid varchar(50), 
-pass varchar(256), 
-name varchar(256), 
-year integer
+  uid varchar(50), 
+  pass varchar(256), 
+  name varchar(256), 
+  year integer
 )AS $$
 BEGIN
  INSERT INTO Users VALUES (uid, pass, name);

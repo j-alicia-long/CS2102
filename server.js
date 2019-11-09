@@ -33,6 +33,9 @@ app.use('/users', routes.users);
 app.use('/courses', routes.courses);
 app.use('/students', routes.students);
 app.use('/facilitators', routes.facilitators);
+app.use('/forum', routes.forum);
+app.use('/threads', routes.threads);
+app.use('/entries', routes.entries);
 
 // Serves the client when deployed in production
 if (process.env.NODE_ENV === 'production') {

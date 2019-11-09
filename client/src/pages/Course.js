@@ -40,7 +40,7 @@ class Course extends React.Component {
             <div>
               {this.state.course_details.map(course => (
                 <div>
-                  <h1 key={course.name} style={{ textTransform: 'uppercase' }}>
+                  <h1 key = {course.name} style={{ textTransform: 'uppercase' }}>
                     {course.name}
                   </h1>
                   <h3 key={course.cid} style={{ textAlign: 'left' }}>
