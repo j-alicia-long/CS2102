@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS AssignTut CASCADE;
 DROP TABLE IF EXISTS ManagesGroup CASCADE;
 DROP TABLE IF EXISTS Forums CASCADE;
 DROP TABLE IF EXISTS Entries CASCADE;
+DROP TABLE IF EXISTS Threads CASCADE;
 DROP TABLE IF EXISTS HasAccess CASCADE;
 
 CREATE TABLE Users (
@@ -162,8 +163,8 @@ CREATE TABLE Threads (
   uid VARCHAR(50) REFERENCES Users (uid),
   t_date DATE NOT NULL,
   t_views INTEGER,
-  e_date DATE NOT NULL,
-)
+  e_date DATE NOT NULL
+);
 
 CREATE TABLE Entries (
   eid       varchar(50),
@@ -306,7 +307,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_enrolled_user()
+CREATE TRIGGER check_enrolled_user
 BEFORE INSERT OR UPDATE ON Selects
 FOR EACH ROW EXECUTE PROCEDURE is_student();
 
@@ -323,6 +324,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_course_manager()
+CREATE TRIGGER check_course_manager
 BEFORE INSERT OR UPDATE ON Courses
 FOR EACH ROW EXECUTE PROCEDURE is_professor();
