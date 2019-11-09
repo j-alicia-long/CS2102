@@ -36,7 +36,7 @@ CREATE TABLE TAs (
 );
 
 CREATE TABLE Professors (
-  uid       varchar(50) PRIMARY KEY REFERENCES Users (uid),
+  uid       varchar(50) PRIMARY KEY REFERENCES Users (uid)
 );
 
 CREATE TABLE Supervises (

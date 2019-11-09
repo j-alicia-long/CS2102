@@ -39,6 +39,34 @@ const getTA = (req, res) => {
   );
 };
 
+const checkIfFacil = (req, res) => {
+  const uid = req.params.uid;
+  pool.query(
+    'SELECT * FROM Professors WHERE uid = $1 UNION SELECT * FROM TAs WHERE uid = $1',
+    [uid],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send('Error checking if user is a Facilitator of course');
+      }
+      const facilitators = filterFacilitators(req.query, results.rows);
+      res.status(200).json(facilitators);
+    }
+  );
+};
+
+const checkIfProf = (req, res) => {
+  const uid = req.params.uid;
+  pool.query('SELECT * FROM Professors WHERE uid = $1', [uid], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(400).send('Error checking if user is a professor');
+    }
+    const facilitators = filterFacilitators(req.query, results.rows);
+    res.status(200).json(facilitators);
+  });
+};
+
 const filterFacilitators = (query, facilitators) => {
   let result = facilitators;
   for (key in query) {
@@ -54,5 +82,7 @@ const filterFacilitators = (query, facilitators) => {
 // route paths
 router.get('/ta/:c_code', getTA);
 router.get('/prof/:c_code', getProf);
+router.get('/check_facil/:uid', checkIfFacil);
+router.get('/check_prof/:uid', checkIfProf);
 
 module.exports = router;
