@@ -14,7 +14,7 @@ class ForumTopic extends React.Component {
           <CourseNavBar />
           <div className="course-description">
             <div>
-              <h2 style={{ textAlign: "left" }}> NEW FORUM TOPIC</h2>
+              <h3 style={{ textAlign: "left" }}> <a href = "/CourseForum">EE3333 FORUM</a> > NEW FORUM TOPIC</h3>
             </div>
             </div>
             <div className ="form-layout">
@@ -46,6 +46,9 @@ class ForumTopic extends React.Component {
                               <label for = "tut4">Tutorial Group 4</label>
                           </div>  
                          </fieldset>
+                         <div className="submit-button">
+                      <input type="submit" value="Submit"></input>
+                    </div>
                     </div>
                     <div>
 

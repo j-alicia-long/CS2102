@@ -14,7 +14,7 @@ class DiscussionThreads extends React.Component {
           <CourseNavBar />
           <div className="course-description">
             <div>
-              <h2 style={{ textAlign: "left" }}> <a href ="/CourseForum">CS2102 Forum</a> > General Discussion</h2>
+              <h2 style={{ textAlign: "left" }}> <a href ="/CourseForum">EE3333 Forum</a> > General Discussion</h2>
             </div>
     
           <div className="join-button">

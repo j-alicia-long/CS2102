@@ -14,7 +14,7 @@ class CourseForum extends React.Component {
           <CourseNavBar />
           <div className="course-description">
             <div>
-              <h2 style={{ textAlign: "left" }}> CS2102 FORUM</h2>
+              <h2 style={{ textAlign: "left" }}> EE3333 FORUM</h2>
             </div>
             <div className="join-button">
               <Nav.Link href="/ForumTopic" >
