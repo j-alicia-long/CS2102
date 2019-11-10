@@ -1,39 +1,36 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { authService } from './authService';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { authService } from "./authService";
 
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      userId: ''
+      name: "",
+      userId: ""
     };
 
     this.logout = this.logout.bind(this);
   }
-  /*
+
   componentDidMount() {
-    //this.setUserInfo();
+    this.setUserInfo();
   }
 
   componentDidUpdate() {
     if (this.state.name) {
       return;
     }
-    // this.setUserInfo();
+    this.setUserInfo();
   }
-  */
 
   logout = () => {
     authService.logout();
-    fetch('/auth/logout').then(this.props.history.push('/Login'));
+    fetch("/auth/logout").then(this.props.history.push("/Login"));
   };
-
-  /*
 
   setUserInfo() {
     const user = authService.getUser();
@@ -41,19 +38,19 @@ class Navigation extends React.Component {
       this.setState({ name: user.name, userId: user.uid });
     }
   }
-*/
+
   render() {
     if (authService.loggedIn()) {
       return (
         <Navbar collapseOnSelect bg="dark" variant="dark" expand="sm">
           <Navbar.Brand href="/Home">
             <img
-              src={require('./logo.png')}
+              src={require("./logo.png")}
               width="30"
               height="30"
               className="d-inline-block align-top"
             />
-            {' Course Star'}
+            {" Course Star"}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -66,7 +63,9 @@ class Navigation extends React.Component {
               </Nav.Item>
             </Nav>
             <Nav>
-              <Navbar.Text className="text-center mx-4 mt-1">{this.state.userId}</Navbar.Text>
+              <Navbar.Text className="text-center mx-4 mt-1">
+                {this.state.userId}
+              </Navbar.Text>
               <NavDropdown
                 className="justify-content-end"
                 title={this.state.name}
@@ -88,12 +87,12 @@ class Navigation extends React.Component {
         <Navbar collapseOnSelect bg="dark" variant="dark" expand="sm">
           <Navbar.Brand href="/Home">
             <img
-              src={require('./logo.png')}
+              src={require("./logo.png")}
               width="30"
               height="30"
               className="d-inline-block align-top"
             />
-            {' Course Star'}
+            {" Course Star"}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

@@ -1,16 +1,16 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { authService } from '../authService';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { authService } from "../authService";
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Form, Button } from 'react-bootstrap';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { Form, Button } from "react-bootstrap";
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { username: "", password: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,22 +26,22 @@ class LoginForm extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    const response = await fetch('/auth/login', {
-      method: 'POST',
+    const response = await fetch("/auth/login", {
+      method: "POST",
       body: JSON.stringify(this.state),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     });
 
     const token = await response.json().catch(() => {
-      alert('Wrong username and/or password!');
+      alert("Wrong username and/or password!");
     });
     if (token) {
       authService.login(token);
-      localStorage.setItem('user_id', JSON.stringify(this.state.username));
-      console.log('redirecting');
-      this.props.history.push('/MyCourses');
+      localStorage.setItem("user_id", JSON.stringify(this.state.username));
+      console.log("redirecting");
+      this.props.history.push("/MyCourses");
     }
   };
 
@@ -52,7 +52,7 @@ class LoginForm extends React.Component {
           <Col
             lg="auto"
             className="p-4"
-            style={{ border: '1px solid grey', 'border-radius': '0.5em' }}
+            style={{ border: "1px solid grey", borderRadius: "0.5em" }}
           >
             <Form onSubmit={this.handleSubmit}>
               <Form.Group controlId="formBasicEmail">
