@@ -147,13 +147,13 @@ CREATE TABLE ManagesGroup (
 );
 
 CREATE TABLE Forums (
-  fid varchar(50) PRIMARY KEY,
+  fid       varchar(50) PRIMARY KEY,
   uid       varchar(50),
-  cid		 varchar(50) NOT NULL,
+  cid		    varchar(50) NOT NULL,
   yearsem   varchar(20),
-  f_title VARCHAR(50),
-  f_dscp varchar(100),
-  f_date DATE NOT NULL,
+  f_title   varchar(50),
+  f_dscp    varchar(100),
+  f_date    date NOT NULL,
   FOREIGN KEY (cid, yearsem) REFERENCES Courses (cid, yearsem)
       ON DELETE CASCADE
 );
@@ -166,14 +166,16 @@ CREATE TABLE Forums (
 ) */
 
 CREATE TABLE Entries (
-  fid varchar(50),
+  eid      varchar(50),
   uid      varchar(50) REFERENCES Users (uid),
   cid      varchar(50) NOT NULL,
   e_post	 varchar(2000) NOT NULL,
+  e_title  varchar(100) NOT NULL,
   e_date	 date			NOT NULL,
   e_time   time	    NOT NULL,
-  num_e INTEGER,
-  PRIMARY KEY (uid, cid, e_title)
+  fid      varchar(50),
+  PRIMARY KEY (eid, fid),
+  FOREIGN KEY (fid) REFERENCES Forums (fid) ON DELETE CASCADE
 );
 
 CREATE TABLE HasAccess (
