@@ -147,7 +147,7 @@ CREATE TABLE ManagesGroup (
 );
 
 CREATE TABLE Forums (
-  uid       varchar(50) PRIMARY KEY,
+  fid       varchar(50) PRIMARY KEY,
   cid		 varchar(50) NOT NULL,
   yearsem   varchar(20),
   f_title VARCHAR(50),
@@ -161,8 +161,8 @@ CREATE TABLE Threads (
   uid VARCHAR(50) REFERENCES Users (uid),
   t_title VARCHAR(50),
   t_post VARCHAR(2000),
-  t_date DATE NOT NULL,
-)
+  t_date DATE NOT NULL
+);
 
 CREATE TABLE Entries (
   uid      varchar(50) REFERENCES Users (uid),
