@@ -9,7 +9,6 @@ class DiscussionThreads extends React.Component {
   state = {
     login: false,
     forum_list: [],
-    threads_list: [],
     entries_list: [],
     course_details: []
   };
@@ -17,13 +16,6 @@ class DiscussionThreads extends React.Component {
   componentDidMount() {
     // Call our fetch function below once the component mounts
     
-    this.fetchThreadsList()
-      .then(res => {
-        this.setState({ threads_list: res });
-        
-      })
-      .catch(err => console.log(err));
-
     this.fetchEntriesList()
       .then(res => {
         this.setState({ entries_list: res});
@@ -57,19 +49,6 @@ class DiscussionThreads extends React.Component {
   };
   
   
-  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  fetchThreadsList = async () => {
-    const t_code = JSON.parse(localStorage.getItem('thread_code'));
-    const response = await fetch('/threads' + t_code);
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    console.log('RESPONSE SUCCESS: ', body);
-    return body;
-  };
-
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   fetchEntriesList = async () => {
     const e_code = JSON.parse(localStorage.getItem('entry_code'));
@@ -200,6 +179,7 @@ class DiscussionThreads extends React.Component {
           </div>
         </div>
       </div>
+      </div>
     );
   }
 }
@@ -208,7 +188,7 @@ export default DiscussionThreads;
 
   
 
-  /*render() {
+  {/*render() {
     return (
       <div>
         <div className="body">
@@ -225,4 +205,4 @@ export default DiscussionThreads;
                 ))
               ))}
             </div>
-          
+*/}        
