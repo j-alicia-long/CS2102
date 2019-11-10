@@ -144,23 +144,6 @@ const deleteStudentFromCourse = (req, res) => {
   );
 };
 
-const getDistinct = (req, res) => {
-  const cid = req.params.cid;
-  const type = req.params.type;
-
-  pool.query(
-    'SELECT DISTINCT * FROM HasGroup WHERE cid = $1 AND l_type = $2',
-    [cid, type],
-    (error, results) => {
-      if (error) {
-        console.error(error);
-        return res.status(400).send(`Error fetching course with ID: ${id}`);
-      }
-      res.status(200).json(results.rows);
-    }
-  );
-};
-
 const deleteLesson = (req, res) => {
   const { cid, gid, uid, l_type } = req.body;
   var AssignLesson =
@@ -232,7 +215,6 @@ router.get('', getCourses);
 router.get('/:id', getCourseById);
 router.get('/:id/students', getStudentsInCourse);
 router.get('/checkstatus/:cid/:uid', checkEnrolStatus);
-router.get('/distinct/:cid/:type', getDistinct);
 router.get('/allLessonsInCourse/:cid', getAllLessonsInCourse);
 router.get('/fetchLessonByType/:cid/:uid/:l_type', fetchLessonByType);
 

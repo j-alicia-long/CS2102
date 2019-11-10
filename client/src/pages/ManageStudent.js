@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Button, Modal, Container, Row, Col, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Button, Modal, Container, Row, Col } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import accountIcon from '@iconify/icons-mdi/account';
 import { confirmAlert } from 'react-confirm-alert';
@@ -13,18 +13,14 @@ class ManageStudent extends React.Component {
   state = {
     login: false,
     course_details: [],
-    all_list: [],
     all_info_list: [],
-    lect_list: [],
-    lab_list: [],
-    tut_list: [],
-    distinct_lect: [],
-    distinct_lab: [],
-    distinct_tut: [],
     all_lessons: [],
     try_list: [],
     showModal: false,
-    curr_uid: ''
+    curr_uid: '',
+    curr_lect_gid: '',
+    curr_tut_gid: '',
+    curr_lab_gid: ''
   };
 
   componentDidMount() {
@@ -34,51 +30,9 @@ class ManageStudent extends React.Component {
       })
       .catch(err => console.log(err));
 
-    this.fetchAllList()
-      .then(res => {
-        this.setState({ all_list: res });
-      })
-      .catch(err => console.log(err));
-
     this.fetchStudentList()
       .then(res => {
         this.setState({ all_info_list: res });
-      })
-      .catch(err => console.log(err));
-
-    this.fetchLectureList()
-      .then(res => {
-        this.setState({ lect_list: res });
-      })
-      .catch(err => console.log(err));
-
-    this.fetchLabList()
-      .then(res => {
-        this.setState({ lab_list: res });
-      })
-      .catch(err => console.log(err));
-
-    this.fetchTutList()
-      .then(res => {
-        this.setState({ tut_list: res });
-      })
-      .catch(err => console.log(err));
-
-    this.fetchDistinct('Lecture')
-      .then(res => {
-        this.setState({ distinct_lect: res });
-      })
-      .catch(err => console.log(err));
-
-    this.fetchDistinct('Lab')
-      .then(res => {
-        this.setState({ distinct_lab: res });
-      })
-      .catch(err => console.log(err));
-
-    this.fetchDistinct('Tutorial')
-      .then(res => {
-        this.setState({ distinct_tut: res });
       })
       .catch(err => console.log(err));
 
@@ -88,28 +42,6 @@ class ManageStudent extends React.Component {
       })
       .catch(err => console.log(err));
   }
-
-  fetchAllList = async () => {
-    const cid = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/all/' + cid);
-    const body = await response.json();
-    console.log(body);
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
-
-  fetchDistinct = async type => {
-    const cid = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/courses/distinct/' + cid + '/' + type);
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
 
   fetchCurrentCourse = async () => {
     const cid = JSON.parse(localStorage.getItem('course_code'));
@@ -126,39 +58,6 @@ class ManageStudent extends React.Component {
     const cid = JSON.parse(localStorage.getItem('course_code'));
     const response = await fetch('/students/all_info/' + cid);
     const body = await response.json();
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
-
-  fetchLectureList = async () => {
-    const cid = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/lecture/' + cid);
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
-
-  fetchLabList = async () => {
-    const cid = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/lab/' + cid);
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
-
-  fetchTutList = async () => {
-    const cid = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/tutorial/' + cid);
-    const body = await response.json();
-
     if (response.status !== 200) {
       throw Error(body.message);
     }
@@ -185,6 +84,7 @@ class ManageStudent extends React.Component {
     if (lesson_gid === lect_gid || lesson_gid === tut_gid || lesson_gid === lab_gid) {
       alert('Student already in this group');
     } else {
+      this.close();
       confirmAlert({
         title: 'Confirm changes',
         message: 'Are you sure to do this.',
@@ -243,14 +143,7 @@ class ManageStudent extends React.Component {
       })
     });
 
-    alert('Changes made successfully');
-  };
-
-  checkValidity = async (uid, gid_list) => {
-    const response = await fetch('/students/checkValidity/' + uid + '/' + gid_list);
-    const body = await response.json();
-
-    return 1;
+    alert('Changes made successfully. Please refresh browser ');
   };
 
   close() {
@@ -280,18 +173,6 @@ class ManageStudent extends React.Component {
     console.log(body);
     return body;
   };
-
-  retrieveLect = async uid => {
-    const cid = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/fetchLect/' + uid + '/' + cid);
-    const body = await response.json();
-    console.log(body);
-    return 1;
-  };
-
-  checkValues(message, uid) {
-    console.log(message + uid);
-  }
 
   render() {
     var message = this.state.try_list.length
@@ -333,7 +214,7 @@ class ManageStudent extends React.Component {
                     <div className="lesson-info mx-auto lesson-info">Lab: {student.lab_gid}</div>
                   </div>
 
-                  <div className="mx-auto">
+                  <div style={{ margin: 'auto' }}>
                     <Button
                       onClick={() =>
                         this.open(student.uid, student.lect_gid, student.tut_gid, student.lab_gid)
@@ -341,7 +222,6 @@ class ManageStudent extends React.Component {
                     >
                       Modify
                     </Button>
-
                     <Modal show={this.state.showModal} onHide={() => this.close()}>
                       <Modal.Header closeButton>
                         <Modal.Title>Lessons</Modal.Title>

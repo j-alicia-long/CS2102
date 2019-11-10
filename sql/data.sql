@@ -79,33 +79,25 @@ INSERT INTO Professors VALUES ('A0000032');
 
 -- Supervises
 
-INSERT INTO Supervises VALUES ('A0000001', 'A0000027');
-INSERT INTO Supervises VALUES ('A0000002', 'A0000027');
-INSERT INTO Supervises VALUES ('A0000003', 'A0000027');
-INSERT INTO Supervises VALUES ('A0000004', 'A0000027');
-INSERT INTO Supervises VALUES ('A0000004', 'A0000028');
-INSERT INTO Supervises VALUES ('A0000005', 'A0000028');
-INSERT INTO Supervises VALUES ('A0000006', 'A0000028');
-INSERT INTO Supervises VALUES ('A0000007', 'A0000028');
-INSERT INTO Supervises VALUES ('A0000007', 'A0000029');
-INSERT INTO Supervises VALUES ('A0000008', 'A0000028');
-INSERT INTO Supervises VALUES ('A0000008', 'A0000029');
-INSERT INTO Supervises VALUES ('A0000009', 'A0000029');
-INSERT INTO Supervises VALUES ('A0000010', 'A0000029');
+INSERT INTO Supervises VALUES ('A0000021', 'A0000027');
+INSERT INTO Supervises VALUES ('A0000022', 'A0000027');
+INSERT INTO Supervises VALUES ('A0000023', 'A0000027');
+INSERT INTO Supervises VALUES ('A0000021', 'A0000028');
+INSERT INTO Supervises VALUES ('A0000022', 'A0000028');
+INSERT INTO Supervises VALUES ('A0000023', 'A0000028');
+INSERT INTO Supervises VALUES ('A0000021', 'A0000029');
+INSERT INTO Supervises VALUES ('A0000022', 'A0000029');
+INSERT INTO Supervises VALUES ('A0000023', 'A0000029');
 
-INSERT INTO Supervises VALUES ('A0000011', 'A0000030');
-INSERT INTO Supervises VALUES ('A0000012', 'A0000030');
-INSERT INTO Supervises VALUES ('A0000013', 'A0000030');
-INSERT INTO Supervises VALUES ('A0000014', 'A0000030');
-INSERT INTO Supervises VALUES ('A0000014', 'A0000031');
-INSERT INTO Supervises VALUES ('A0000015', 'A0000031');
-INSERT INTO Supervises VALUES ('A0000016', 'A0000031');
-INSERT INTO Supervises VALUES ('A0000017', 'A0000031');
-INSERT INTO Supervises VALUES ('A0000017', 'A0000032');
-INSERT INTO Supervises VALUES ('A0000018', 'A0000031');
-INSERT INTO Supervises VALUES ('A0000018', 'A0000032');
-INSERT INTO Supervises VALUES ('A0000019', 'A0000032');
-INSERT INTO Supervises VALUES ('A0000020', 'A0000032');
+INSERT INTO Supervises VALUES ('A0000024', 'A0000030');
+INSERT INTO Supervises VALUES ('A0000025', 'A0000030');
+INSERT INTO Supervises VALUES ('A0000026', 'A0000030');
+INSERT INTO Supervises VALUES ('A0000024', 'A0000031');
+INSERT INTO Supervises VALUES ('A0000025', 'A0000031');
+INSERT INTO Supervises VALUES ('A0000026', 'A0000031');
+INSERT INTO Supervises VALUES ('A0000024', 'A0000032');
+INSERT INTO Supervises VALUES ('A0000025', 'A0000032');
+INSERT INTO Supervises VALUES ('A0000026', 'A0000032');
 
 -- Courses
 
@@ -481,17 +473,17 @@ INSERT INTO ManagesGroup VALUES ('CS4444_201901_LAB1', 'A0000026');
 
 -- Forum
 
-INSERT INTO Forums VALUES ('1','A0000001', 'EE1000', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('2','A0000010', 'EE3333', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('3','A0000010', 'EE4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('4','A0000010', 'EE4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('5','A0000010', 'EE4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('6','A0000009', 'EE4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('7','A0000014', 'CS1000', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('8','A0000016', 'CS1111', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('9','A00000016', 'CS2222', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('10','A0000017', 'CS3333', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('11','A0000019', 'CS4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'EE1000', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'EE1111', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'EE1111', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'EE2222', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'EE3333', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'EE4444', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'CS1000', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'CS1111', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'CS2222', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'CS3333', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
+INSERT INTO Forums VALUES ('A0000001', 'CS4444', '2019-01', 'General Discussion', 'Posts on module related questions.', '2019-12-10');
 
 -- Entries
 
