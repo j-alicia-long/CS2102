@@ -481,17 +481,17 @@ INSERT INTO ManagesGroup VALUES ('CS4444_201901_LAB1', 'A0000026');
 
 -- Forum
 
-INSERT INTO Forums VALUES ('FEE1000', 'EE1000', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FEE1111', 'EE1111', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FEE1111', 'EE1111', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FEE2222', 'EE2222', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FEE3333', 'EE3333', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FEE4444', 'EE4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FCS1000', 'CS1000', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FCS1111', 'CS1111', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FCS2222', 'CS2222', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FCS3333', 'CS3333', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
-INSERT INTO Forums VALUES ('FCS4444', 'CS4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'EE1000', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'EE1111', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'EE1111', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'EE2222', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'EE3333', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'EE4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'CS1000', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'CS1111', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'CS2222', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'CS3333', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('A0000001', 'CS4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
 
 -- Entries
 

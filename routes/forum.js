@@ -5,17 +5,14 @@ const router = express.Router();
 
 // route handlers
 const getForum = (req, res) => {
-  const f_code = req.params.f_code;
-
   pool.query(
-    'SELECT * FROM FORUM WHERE cid = $1'
-    [f_code],
+    'SELECT * FROM FORUM',
     (error, results) => {
       if (error) {
         console.error(error);
         return res.status(400).send('Error fetching forum');
       }
-      //const forum = filterForums(req.query, results.rows);
+      const forum = filterForums(req.query, results.rows);
       res.status(200).json(forum);
     }
   );
@@ -32,6 +29,20 @@ const filterForums= (query, forums) => {
   }
   return result;
 };
+
+const getForumbyTitle = (req, res) => {
+  const f_title = req.params.id;
+
+  pool.query('SELECT * FROM Form WHERE f_title = $1', 
+  [f_title],
+  (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(400).send(`Error fetching course with ID: ${id}`);
+    }
+    res.status(200).json(results.rows);
+  });
+}
 
 
 // route paths

@@ -147,7 +147,7 @@ CREATE TABLE ManagesGroup (
 );
 
 CREATE TABLE Forums (
-  fid       varchar(50) PRIMARY KEY,
+  uid       varchar(50) PRIMARY KEY,
   cid		 varchar(50) NOT NULL,
   yearsem   varchar(20),
   f_title VARCHAR(50),
@@ -158,23 +158,21 @@ CREATE TABLE Forums (
 );
 
 CREATE TABLE Threads (
-  thid INTEGER PRIMARY KEY,
-  t_title VARCHAR(50),
   uid VARCHAR(50) REFERENCES Users (uid),
+  t_title VARCHAR(50),
   t_post VARCHAR(2000),
   t_date DATE NOT NULL,
 )
 
 CREATE TABLE Entries (
-  eid       varchar(50),
-  fid       varchar(50) REFERENCES Forums (fid) ON DELETE CASCADE,
-  uid       varchar(50) REFERENCES Users (uid),
+  uid      varchar(50) REFERENCES Users (uid),
+  cid      varchar(50) NOT NULL,
   e_title  varchar(50)  NOT NULL,
   e_post	 varchar(2000) NOT NULL,
   e_date	 date			NOT NULL,
   e_time   time	    NOT NULL,
   num_e INTEGER,
-  PRIMARY KEY (eid, fid, uid)
+  PRIMARY KEY (uid, cid, e_title)
 );
 
 CREATE TABLE HasAccess (

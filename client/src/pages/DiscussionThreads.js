@@ -85,8 +85,8 @@ class DiscussionThreads extends React.Component {
 
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   fetchForumList = async () => {
-    const f_code = JSON.parse(localStorage.getItem('forum_code'));
-    const response = await fetch('/forum' + f_code);
+    const f_title = JSON.parse(localStorage.getItem('forum_code'));
+    const response = await fetch('/forum' + f_title);
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -96,9 +96,97 @@ class DiscussionThreads extends React.Component {
     return body;
   };
 
+  render() {
+    return (
+      <div>
+        <div className="body">
+          <CourseNavBar />
+          <div className="course-description">
+          <div>
+            {this.state.course_details.map(course => ( 
+                <h2 key = {course.cid} style={{ textAlign: 'left' }}>
+                  <a href ="/CourseForum">
+                         {course.cid} Forum
+                { this.state.forum_list.map( forum => 
+                <a key = {forum.f_title}>
+                         > {forum.f_title}
+                      </a>
+                )}
+                </a> 
+                </h2>
+             ))} 
+            </div>
+            <div>
+              {this.state.forum_list.map(forum => (
+                <h1 key = {forum.f_title}>
+                  {forum.f_title}
+                </h1>
+              ))}
+            </div>
+          <div className="join-button">
+              <Nav.Link href="/NewForumEntry" >
+              <Button className="btn-lg">Start a Discussion Thread</Button>
+              </Nav.Link>
+          </div>
+          </div>
+          <div className = "thread-layout">
+            <h4 style={{ textAlign: "left" , color: "grey"}}>General Discussion</h4>
+            <Card className="thread-card">
+                <div className = "thread-description">
+                    <p className = "thread-details">
+                        <h5 className = "thread-title">Clarification on finals.</h5>
+                    </p>
+                    <p className = "thread-author">
+                        <h6>Wong Yu Qi</h6>
+                    </p>
+                    <p className = "thread-entry-date">
+                        <h6>5 Nov 2019</h6>
+                    </p>
+                    <p className="num-reply">
+                        <h6>2 Replies</h6>
+                    </p>
+                    <p className= "num-views">
+                        <h6>60 Views</h6>
+                    </p>
+                    <p className = "last-reply-date">
+                        <h6>Last Reply: 7 Nov 2019</h6>
+                    </p>
+                </div>
+            </Card>
+            <Card className="thread-card">
+                <div className = "thread-description">
+                    <p className = "thread-details">
+                        <h5 className = "thread-title">Question regarding Midterm</h5>
+                    </p>
+                    <p className = "thread-author">
+                        <h6>Loh Jia Hao</h6>
+                    </p>
+                    <p className = "thread-entry-date">
+                        <h6>15 Sep 2019</h6>
+                    </p>
+                    <p className="num-reply">
+                        <h6>2 Replies</h6>
+                    </p>
+                    <p className= "num-views">
+                        <h6>80 Views</h6>
+                    </p>
+                    <p className = "last-reply-date">
+                        <h6>Last Reply: 18 Sep 2019</h6>
+                    </p>
+                </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default DiscussionThreads;
+
   
 
-  render() {
+  /*render() {
     return (
       <div>
         <div className="body">
@@ -162,3 +250,4 @@ class DiscussionThreads extends React.Component {
 }
 
 export default DiscussionThreads;
+*/

@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import CourseNavBar from "./CourseNavBar";
 
-import { Button, Card, Nav, Navbar } from "react-bootstrap";
+import { Button, Card, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 class CourseForum extends React.Component {
@@ -169,8 +169,6 @@ class CourseForum extends React.Component {
   render() {
     return (
       <div>
-        <Navbar className="navbar">This is Nav Bar</Navbar>
-
         <div className="body">
         <CourseNavBar />
           <div className="course-description" >
