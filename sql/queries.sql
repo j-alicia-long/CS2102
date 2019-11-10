@@ -16,7 +16,6 @@ DROP TABLE IF EXISTS AssignTut CASCADE;
 DROP TABLE IF EXISTS ManagesGroup CASCADE;
 DROP TABLE IF EXISTS Forums CASCADE;
 DROP TABLE IF EXISTS Entries CASCADE;
-DROP TABLE IF EXISTS Threads CASCADE;
 DROP TABLE IF EXISTS HasAccess CASCADE;
 
 CREATE TABLE Users (
@@ -307,23 +306,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_enrolled_user
-BEFORE INSERT OR UPDATE ON Selects
-FOR EACH ROW EXECUTE PROCEDURE is_student();
+-- CREATE TRIGGER check_enrolled_user
+-- BEFORE INSERT OR UPDATE ON Selects
+-- FOR EACH ROW EXECUTE PROCEDURE is_student();
 
-CREATE OR REPLACE FUNCTION is_professor()
-RETURNS TRIGGER AS $$
-DECLARE count NUMERIC;
-BEGIN
- SELECT COUNT(*) INTO count FROM Courses WHERE NEW.uid != Professors.uid;
- IF count > 0 THEN
- 	RETURN NULL; -- prevent
- ELSE
- 	RETURN NEW; -- allow
- END IF;
-END;
-$$ LANGUAGE plpgsql;
+-- CREATE OR REPLACE FUNCTION is_professor()
+-- RETURNS TRIGGER AS $$
+-- DECLARE count NUMERIC;
+-- BEGIN
+--  SELECT COUNT(*) INTO count FROM Courses WHERE NEW.uid != Professors.uid;
+--  IF count > 0 THEN
+--  	RETURN NULL; -- prevent
+--  ELSE
+--  	RETURN NEW; -- allow
+--  END IF;
+-- END;
+-- $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_course_manager
-BEFORE INSERT OR UPDATE ON Courses
-FOR EACH ROW EXECUTE PROCEDURE is_professor();
+-- CREATE TRIGGER check_course_manager
+-- BEFORE INSERT OR UPDATE ON Courses
+-- FOR EACH ROW EXECUTE PROCEDURE is_professor();
