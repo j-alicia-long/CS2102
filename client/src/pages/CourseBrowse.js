@@ -1,14 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-import Accordion from 'react-bootstrap/Accordion'
+import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
 
 class CourseBrowse extends React.Component {
   state = {
@@ -37,7 +35,7 @@ class CourseBrowse extends React.Component {
 
   handleClick(c_code) {
     const code = c_code;
-    localStorage.setItem("course_code", JSON.stringify(code));
+    localStorage.setItem('course_code', JSON.stringify(code));
   }
 
   render() {
@@ -51,14 +49,15 @@ class CourseBrowse extends React.Component {
               {this.state.data.map((course, i) => (
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey={i}>
-                    <h6>{course.cid}: {course.name}</h6>
+                    <h6>
+                      {course.cid}: {course.name}
+                    </h6>
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey={i}>
                     <Card.Body>
                       <p>Semester: {course.yearsem}</p>
                       <p>Professor ID: {course.uid}</p>
-                      <Link to="/Course"
-                        onClick={() => this.handleClick(course.cid)}>
+                      <Link to="/Course" onClick={() => this.handleClick(course.cid)}>
                         Go to course overview
                       </Link>
                     </Card.Body>
@@ -66,7 +65,6 @@ class CourseBrowse extends React.Component {
                 </Card>
               ))}
             </Accordion>
-
           </Col>
         </Row>
       </Container>

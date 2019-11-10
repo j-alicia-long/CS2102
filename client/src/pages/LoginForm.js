@@ -39,6 +39,7 @@ class LoginForm extends React.Component {
     });
     if (token) {
       authService.login(token);
+      localStorage.setItem('user_id', JSON.stringify(this.state.username));
       console.log('redirecting');
       this.props.history.push('/MyCourses');
     }

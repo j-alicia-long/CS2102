@@ -2,15 +2,16 @@ import React from 'react';
 import '../App.css';
 import CourseNavBar from './CourseNavBar';
 
-import { authService } from '../authService';
 import { Button, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import { confirmAlert } from 'react-confirm-alert';
 
 class Course extends React.Component {
   state = {
     login: false,
     course_details: [],
-    is_a_facil: false,
+    isA_facilOfCourse: false,
+    isA_facil: false,
     enrolment: []
   };
 
@@ -26,9 +27,15 @@ class Course extends React.Component {
       })
       .catch(err => console.log(err));
 
-    this.checkIfFacilitator()
+    this.checkIfFacilOfCourse()
       .then(res => {
-        this.setState({ is_a_facil: res.length ? true : false });
+        this.setState({ isA_facilOfCourse: res.length ? true : false });
+      })
+      .catch(err => console.log(err));
+
+    this.checkIfFacil()
+      .then(res => {
+        this.setState({ isA_facil: res.length ? true : false });
       })
       .catch(err => console.log(err));
   }
@@ -45,7 +52,7 @@ class Course extends React.Component {
 
   checkEnrolStatus = async () => {
     const cid = JSON.parse(localStorage.getItem('course_code'));
-    const uid = authService.getUsername();
+    const uid = JSON.parse(localStorage.getItem('user_id'));
     const response = await fetch('/courses/checkstatus/' + cid + '/' + uid);
     const body = await response.json();
     if (response.status !== 200) {
@@ -54,19 +61,36 @@ class Course extends React.Component {
     return body;
   };
 
-  checkIfFacilitator = async () => {
-    const uid = authService.getUsername();
-    const response = await fetch('/facilitators/check_facil/' + uid);
+  checkIfFacilOfCourse = async () => {
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const uid = JSON.parse(localStorage.getItem('user_id'));
+    const response = await fetch('/facilitators/checkIfFacilOfCourse/' + uid + '/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message);
     }
+    console.log('Facil of C: ');
+    console.log(body);
+    return body;
+  };
+
+  checkIfFacil = async () => {
+    const uid = JSON.parse(localStorage.getItem('user_id'));
+    const response = await fetch('/facilitators/checkIfFacil/' + uid);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+
+    console.log('Jz Facil: ');
+    console.log(body);
     return body;
   };
 
   addStudents = async () => {
-    if (!this.state.enrolment.length && !this.state.is_a_facil) {
+    if (!this.state.enrolment.length && !this.state.isA_facil && !this.state.isA_facilOfCourse) {
       const cid = JSON.parse(localStorage.getItem('course_code'));
       const yearsem = JSON.parse(localStorage.getItem('year_sem'));
       await fetch('/courses/' + cid + '/students', {
@@ -76,7 +100,7 @@ class Course extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          uid: authService.getUsername(),
+          uid: JSON.parse(localStorage.getItem('user_id')),
           yearsem: yearsem
         })
       });
@@ -86,12 +110,24 @@ class Course extends React.Component {
           this.setState({ enrolment: res });
         })
         .catch(err => console.log(err));
+
+      confirmAlert({
+        title: 'Successfully Enrolled',
+        message: cid,
+        buttons: [
+          {
+            label: 'Yes'
+          }
+        ]
+      });
     }
   };
 
   render() {
-    var status = this.state.is_a_facil
+    var status = this.state.isA_facilOfCourse
       ? 'Incharge'
+      : this.state.isA_facil
+      ? 'Ineligible'
       : this.state.enrolment.length
       ? 'Enrolled'
       : 'Join Course';

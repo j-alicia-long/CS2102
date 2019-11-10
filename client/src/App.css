@@ -326,8 +326,9 @@ input.entry-attach {
 }
 
 .lesson-info {
-  margin: auto 100px auto 0;
-  width: 500px;
+  margin: 20px auto;
+  width: 250px;
+  background-color: gray;
 }
 
 .te {

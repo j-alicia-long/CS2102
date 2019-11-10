@@ -39,6 +39,23 @@ const getTA = (req, res) => {
   );
 };
 
+const checkIfFacilOfCourse = (req, res) => {
+  const cid = req.params.cid;
+  const uid = req.params.uid;
+  pool.query(
+    'SELECT uid FROM ManagesGroup mg, HasGroup hg WHERE uid = $1 AND hg.cid = $2 AND hg.gid = mg.gid',
+    [uid, cid],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send('Error checking if user is a Facilitator of course');
+      }
+      const facilitators = filterFacilitators(req.query, results.rows);
+      res.status(200).json(facilitators);
+    }
+  );
+};
+
 const checkIfFacil = (req, res) => {
   const uid = req.params.uid;
   pool.query(
@@ -55,9 +72,10 @@ const checkIfFacil = (req, res) => {
   );
 };
 
-const checkIfProf = (req, res) => {
+const checkIfProfOfCourse = (req, res) => {
   const uid = req.params.uid;
-  pool.query('SELECT * FROM Professors WHERE uid = $1', [uid], (error, results) => {
+  const cid = req.params.cid;
+  pool.query('SELECT * FROM Courses WHERE uid = $1 AND cid = $2', [uid, cid], (error, results) => {
     if (error) {
       console.error(error);
       return res.status(400).send('Error checking if user is a professor');
@@ -82,7 +100,8 @@ const filterFacilitators = (query, facilitators) => {
 // route paths
 router.get('/ta/:c_code', getTA);
 router.get('/prof/:c_code', getProf);
-router.get('/check_facil/:uid', checkIfFacil);
-router.get('/check_prof/:uid', checkIfProf);
+router.get('/checkIfFacilOfCourse/:uid/:cid', checkIfFacilOfCourse);
+router.get('/checkIfFacil/:uid', checkIfFacil);
+router.get('/checkIfProfOfCourse/:uid/:cid', checkIfProfOfCourse);
 
 module.exports = router;

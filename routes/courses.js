@@ -162,78 +162,69 @@ const getDistinct = (req, res) => {
 };
 
 const deleteLesson = (req, res) => {
-  const { cid, gid, currgid, uid, l_type } = req.body;
-  console.log(cid, gid, currgid, uid, l_type);
-  if (l_type === 'Lecture') {
-    pool.query('DELETE FROM AssignLect WHERE gid = $1 AND uid = $2', [gid, uid], error => {
-      if (error) {
-        console.error(error);
-        return res.status(400).send('Error deleting student from lecure');
-      }
-      res.status(201).send(`Student successfully deleted from lecture`);
-    });
-  } else if (l_type === 'Lab') {
-    pool.query('DELETE FROM AssignLab WHERE gid = $1 AND uid = $2', [gid, uid], error => {
-      if (error) {
-        console.error(error);
-        return res.status(400).send('Error deleting student from lab');
-      }
-      res.status(201).send(`Student successfully deleted from lab`);
-    });
-  } else if (l_type === 'Tutorial') {
-    pool.query('DELETE FROM AssignTut WHERE gid = $1 AND uid = $2', [gid, uid], error => {
-      if (error) {
-        console.error(error);
-        return res.status(400).send('Error deleting student from tutorial');
-      }
-      res.status(201).send(`Student successfully deleted from tutorial`);
-    });
-  }
+  const { cid, gid, uid, l_type } = req.body;
+  var AssignLesson =
+    l_type === 'Lecture' ? 'AssignLect' : l_type === 'Tutorial' ? 'AssignTut' : 'AssignLab';
+  console.log(cid, gid, uid, l_type, AssignLesson);
+
+  pool.query('DELETE FROM ' + AssignLesson + ' WHERE gid = $1 AND uid = $2', [gid, uid], error => {
+    if (error) {
+      console.error(error);
+      return res.status(400).send('Error deleting student from lecure');
+    }
+    res.status(201).send(`Student successfully deleted from lecture`);
+  });
 };
 
 const addLesson = (req, res) => {
-  const { cid, gid, currgid, uid, l_type } = req.body;
-  const assign_type =
-    l_type === 'Lecture' ? 'AssignLect' : l_type === 'Lab' ? 'AssignLab' : 'AssignTut';
-  console.log(cid, gid, currgid, uid, l_type, assign_type);
+  const { cid, gid, uid, l_type } = req.body;
+  const AssignLesson =
+    l_type === 'Lecture' ? 'AssignLect' : l_type === 'Tutorial' ? 'AssignTut' : 'AssignLab';
+  console.log(cid, gid, uid, l_type, AssignLesson);
 
-  if (l_type === 'Lecture') {
-    pool.query(
-      'INSERT INTO AssignLect VALUES ($1, $2, $3, $4, $5)',
-      [uid, cid, '2019-01', currgid, l_type],
-      error => {
-        if (error) {
-          console.error(error);
-          return res.status(400).send('Error adding student to lecture');
-        }
-        res.status(201).send(`Student successfully added to lecture`);
+  pool.query(
+    'INSERT INTO ' + AssignLesson + ' VALUES ($1, $2, $3, $4, $5)',
+    [uid, cid, '2019-01', gid, l_type],
+    error => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send('Error adding student to lecture');
       }
-    );
-  } else if (l_type === 'Lab') {
-    pool.query(
-      'INSERT INTO AssignLab VALUES ($1, $2, $3, $4, $5)',
-      [uid, cid, '2019-01', currgid, l_type],
-      error => {
-        if (error) {
-          console.error(error);
-          return res.status(400).send('Error adding student to lab');
-        }
-        res.status(201).send(`Student successfully added to lab`);
+      res.status(201).send(`Student successfully added to lecture`);
+    }
+  );
+};
+
+const getAllLessonsInCourse = (req, res) => {
+  const cid = req.params.cid;
+
+  pool.query('SELECT DISTINCT * FROM HasGroup WHERE cid = $1', [cid], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(400).send(`Error fetching lessons from course with cid ${cid}`);
+    }
+    res.status(200).json(results.rows);
+  });
+};
+
+const fetchLessonByType = (req, res) => {
+  const cid = req.params.cid;
+  const uid = req.params.uid;
+  const l_type = req.params.l_type;
+  var assignLesson =
+    l_type === 'Lecture' ? 'AssignLect' : l_type === 'Tutorial' ? 'AssignTut' : 'AssignLab';
+
+  pool.query(
+    'SELECT gid FROM ' + assignLesson + ' WHERE cid = $1 AND uid = $2 AND l_type = $3',
+    [cid, uid, l_type],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send(`Error fetching lessons from course with cid ${cid}`);
       }
-    );
-  } else if (l_type === 'Tutorial') {
-    pool.query(
-      'INSERT INTO AssignTut VALUES ($1, $2, $3, $4, $5)',
-      [uid, cid, '2019-01', currgid, l_type],
-      error => {
-        if (error) {
-          console.error(error);
-          return res.status(400).send('Error adding student to tutorial');
-        }
-        res.status(201).send(`Student successfully added to tutorial`);
-      }
-    );
-  }
+      res.status(200).json(results.rows);
+    }
+  );
 };
 
 // route paths
@@ -242,6 +233,8 @@ router.get('/:id', getCourseById);
 router.get('/:id/students', getStudentsInCourse);
 router.get('/checkstatus/:cid/:uid', checkEnrolStatus);
 router.get('/distinct/:cid/:type', getDistinct);
+router.get('/allLessonsInCourse/:cid', getAllLessonsInCourse);
+router.get('/fetchLessonByType/:cid/:uid/:l_type', fetchLessonByType);
 
 router.post('/lessons/delete', deleteLesson);
 router.post('/lessons/add', addLesson);
