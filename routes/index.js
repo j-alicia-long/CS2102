@@ -3,7 +3,7 @@ const users = require("./users");
 const courses = require("./courses");
 const students = require("./students");
 const facilitators = require("./facilitators");
-const forum = require("./forum");
+const forums = require("./forum");
 const entries = require("./entries");
 
 module.exports = {
@@ -12,6 +12,6 @@ module.exports = {
   courses,
   students,
   facilitators,
-  forum,
+  forums,
   entries
 };
