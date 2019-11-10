@@ -116,13 +116,6 @@ class DiscussionThreads extends React.Component {
                 </h2>
              ))} 
             </div>
-            <div>
-              {this.state.forum_list.map(forum => (
-                <h1 key = {forum.f_title}>
-                  {forum.f_title}
-                </h1>
-              ))}
-            </div>
           <div className="join-button">
               <Nav.Link href="/NewForumEntry" >
               <Button className="btn-lg">Start a Discussion Thread</Button>
@@ -136,10 +129,10 @@ class DiscussionThreads extends React.Component {
                     <p className = "thread-details">
                         <h5 className = "thread-title">Clarification on finals.</h5>
                     </p>
-                    <p className = "thread-author">
+                    <p className = "entry-author">
                         <h6>Wong Yu Qi</h6>
                     </p>
-                    <p className = "thread-entry-date">
+                    <p className = "entry-date">
                         <h6>5 Nov 2019</h6>
                     </p>
                     <p className="num-reply">
@@ -148,7 +141,7 @@ class DiscussionThreads extends React.Component {
                     <p className= "num-views">
                         <h6>60 Views</h6>
                     </p>
-                    <p className = "last-reply-date">
+                    <p className = "last-entry-date">
                         <h6>Last Reply: 7 Nov 2019</h6>
                     </p>
                 </div>
@@ -156,12 +149,12 @@ class DiscussionThreads extends React.Component {
             <Card className="thread-card">
                 <div className = "thread-description">
                     <p className = "thread-details">
-                        <h5 className = "thread-title">Question regarding Midterm</h5>
+                        <h5 className = "entry-title">Question regarding Midterm</h5>
                     </p>
-                    <p className = "thread-author">
+                    <p className = "entry-author">
                         <h6>Loh Jia Hao</h6>
                     </p>
-                    <p className = "thread-entry-date">
+                    <p className = "entry-date">
                         <h6>15 Sep 2019</h6>
                     </p>
                     <p className="num-reply">
@@ -170,10 +163,39 @@ class DiscussionThreads extends React.Component {
                     <p className= "num-views">
                         <h6>80 Views</h6>
                     </p>
-                    <p className = "last-reply-date">
+                    <p className = "last-entry-date">
                         <h6>Last Reply: 18 Sep 2019</h6>
                     </p>
                 </div>
+            </Card>
+            <div className = "thread-layout">
+            {this.state.threads_list.map( (threads, i) => (
+              <h4 style={{ textAlign: "left" , color: "grey"}} key = {`${i}-threads`}>{threads.t_title}</h4>
+            ))}
+            <Card className="thread-card">
+               {this.state.entries_list.map(entries => (
+                    
+                <div className = "thread-description">
+                    <p className = "thread-details">
+                        <h5 className = "entry-title" key = {entries.e_title}>{entries.e_title}</h5>
+                    </p>
+                    <p className = "entry-author" key = {entries.uid}>
+                        <h6>{entries.uid}</h6>
+                    </p>
+                    <p className = "entry-date" key = {entries.e_date}>
+                        <h6>{entries.e_date}</h6>
+                    </p>
+                    <p className="num-reply" key = {entries.num_e}>
+                        <h6>{entries.num_e}</h6>
+                    </p>
+                    <p className= "num-views" key = {entries.e_views}>
+                        <h6>{entries.e_views}</h6>
+                    </p>
+                    <p className = "last-reply-date" key = {entries.e_date}>
+                        <h6>{entries.e_date}</h6>
+                    </p>
+                    </div>                   
+                    ))} 
             </Card>
           </div>
         </div>
@@ -203,51 +225,4 @@ export default DiscussionThreads;
                 ))
               ))}
             </div>
-
-            <div className="join-button">
-              <Nav.Link href="/NewForumEntry">
-                <Button className="btn-lg">Start a Discussion Thread</Button>
-              </Nav.Link>
-            </div>
-          </div>
-          </div>
-
-          <div className = "thread-layout">
-            {this.state.threads_list.map( (threads, i) => (
-              <h4 style={{ textAlign: "left" , color: "grey"}} key = {`${i}-threads`}>{threads.t_title}</h4>
-            ))}
-            <Card className="thread-card">
-               {this.state.threads_list.map(threads => ( 
-                 this.state.entries_list.map(entries => (
-                    
-                <div className = "thread-description">
-                    <p className = "thread-details">
-                        <h5 className = "thread-title" key = {threads.t_title}>{threads.t_title}</h5>
-                    </p>
-                    <p className = "thread-author" key = {threads.uid}>
-                        <h6>{threads.uid}</h6>
-                    </p>
-                    <p className = "thread-entry-date" key = {threads.t_date}>
-                        <h6>{threads.t_date}</h6>
-                    </p>
-                    <p className="num-reply" key = {entries.num_e}>
-                        <h6>{entries.num_e}</h6>
-                    </p>
-                    <p className= "num-views" key = {threads.t_views}>
-                        <h6>{threads.t_views}</h6>
-                    </p>
-                    <p className = "last-reply-date" key = {entries.e_date}>
-                        <h6>{entries.e_date}</h6>
-                    </p>
-                    </div>                    ))
-                    ))} 
-                    
-            </Card>
-         </div>
-        </div>
-    );
-   }
-}
-
-export default DiscussionThreads;
-*/
+          
