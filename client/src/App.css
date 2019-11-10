@@ -130,8 +130,7 @@
 
 /* CourseForum */
 
-
-.new-button{
+.new-button {
   margin-left: auto;
 }
 
@@ -139,7 +138,6 @@
   margin: 50px auto 50px;
   width: 100%;
 }
-
 
 .forum-card {
   margin: 30px auto;
@@ -337,7 +335,6 @@ input.entry-attach {
 .lesson-info {
   margin: 20px auto;
   width: 250px;
-  background-color: gray;
 }
 
 .te {

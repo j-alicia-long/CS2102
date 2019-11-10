@@ -44,7 +44,7 @@ CREATE TABLE Supervises (
   pid 	 varchar(50),
   since 	 date,
   PRIMARY KEY(sid, pid),
-  FOREIGN KEY(sid) REFERENCES Students (uid),
+  FOREIGN KEY(sid) REFERENCES TAs (uid),
   FOREIGN KEY(pid) REFERENCES Professors (uid)
 );
 
