@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS AssignTut CASCADE;
 DROP TABLE IF EXISTS ManagesGroup CASCADE;
 DROP TABLE IF EXISTS Forums CASCADE;
 DROP TABLE IF EXISTS Entries CASCADE;
+DROP TABLE IF EXISTS Threads CASCADE;
 DROP TABLE IF EXISTS HasAccess CASCADE;
 
 CREATE TABLE Users (
@@ -36,7 +37,7 @@ CREATE TABLE TAs (
 );
 
 CREATE TABLE Professors (
-  uid       varchar(50) PRIMARY KEY REFERENCES Users (uid),
+  uid       varchar(50) PRIMARY KEY REFERENCES Users (uid)
 );
 
 CREATE TABLE Supervises (
@@ -305,7 +306,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_enrolled_user()
+CREATE TRIGGER check_enrolled_user
 BEFORE INSERT OR UPDATE ON Selects
 FOR EACH ROW EXECUTE PROCEDURE is_student();
 
@@ -322,6 +323,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_course_manager()
+CREATE TRIGGER check_course_manager
 BEFORE INSERT OR UPDATE ON Courses
 FOR EACH ROW EXECUTE PROCEDURE is_professor();

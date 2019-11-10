@@ -109,7 +109,7 @@ class Navigation extends React.Component {
             </Nav>
             <Nav>
               <Nav.Item className="mx-2">
-                <Nav.Link href="/Login">Login or Sign up</Nav.Link>
+                <Nav.Link href="/Login">Login</Nav.Link>
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>

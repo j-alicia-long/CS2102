@@ -479,7 +479,6 @@ INSERT INTO ManagesGroup VALUES ('CS4444_201901_LEC1', 'A0000032');
 INSERT INTO ManagesGroup VALUES ('CS4444_201901_TUT1', 'A0000024');
 INSERT INTO ManagesGroup VALUES ('CS4444_201901_LAB1', 'A0000026');
 
-
 -- Forum
 
 INSERT INTO Forums VALUES ('FEE1000', 'EE1000', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
@@ -520,7 +519,7 @@ INSERT INTO Threads VALUES ('TCS3333_02', 'Questions regarding Midterms', 'A0000
 INSERT INTO Threads VALUES ('TCS4444_01', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
 INSERT INTO Threads VALUES ('TCS4444_02', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
 
--- HasAccess
+/*-- HasAccess
 
 INSERT INTO HasAccess VALUES ('FEE1000', 'EE1000_201901_LEC1');
 INSERT INTO HasAccess VALUES ('FEE1000', 'EE1000_201901_TUT1');
@@ -569,3 +568,4 @@ INSERT INTO HasAccess VALUES ('FCS3333', 'CS3333_201901_LAB2');
 INSERT INTO HasAccess VALUES ('FCS4444', 'CS4444_201901_LEC1');
 INSERT INTO HasAccess VALUES ('FCS4444', 'CS4444_201901_TUT1');
 INSERT INTO HasAccess VALUES ('FCS4444', 'CS4444_201901_LAB1');
+*/

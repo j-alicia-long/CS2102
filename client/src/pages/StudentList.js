@@ -1,9 +1,11 @@
 import React from 'react';
 import '../App.css';
 import CourseNavBar from './CourseNavBar';
+import { authService } from '../authService';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import accountIcon from '@iconify/icons-mdi/account';
 
@@ -13,12 +15,11 @@ class StudentList extends React.Component {
     lect_list: [],
     tut_list: [],
     lab_list: [],
-    display_list: []
+    display_list: [],
+    is_a_prof: false
   };
 
   componentDidMount() {
-    // Call our fetch function below once the component mounts
-
     this.fetchAllList()
       .then(res => {
         this.setState({ all_list: res });
@@ -44,39 +45,40 @@ class StudentList extends React.Component {
       })
       .catch(err => console.log(err));
 
+    this.is_a_prof()
+      .then(res => {
+        this.setState({ is_a_prof: res.length ? true : false });
+      })
+      .catch(err => console.log(err));
+
     this.setState({ display_list: this.state.all_list });
   }
 
-  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   fetchAllList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/all/' + c_code);
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/all/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message);
     }
-    console.log('RESPONSE SUCCESS All: ', body);
     return body;
   };
 
-  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   fetchLectureList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/lecture/' + c_code);
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/lecture/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message);
     }
-    console.log('RESPONSE SUCCESS Lect: ', body);
     return body;
   };
 
-  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   fetchLabList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/lab/' + c_code);
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/lab/' + cid);
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -85,12 +87,21 @@ class StudentList extends React.Component {
     return body;
   };
 
-  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   fetchTutList = async () => {
-    const c_code = JSON.parse(localStorage.getItem('course_code'));
-    const response = await fetch('/students/tutorial/' + c_code);
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/tutorial/' + cid);
     const body = await response.json();
 
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
+
+  is_a_prof = async () => {
+    const uid = authService.getUsername();
+    const response = await fetch('/facilitators/check_prof/' + uid);
+    const body = await response.json();
     if (response.status !== 200) {
       throw Error(body.message);
     }
@@ -122,7 +133,7 @@ class StudentList extends React.Component {
           <CourseNavBar />
           <div className="nav-groups">
             <button
-              class="btn btn-outline-success mx-auto"
+              className="btn btn-outline-success mx-auto"
               type="button"
               onClick={() => this.handleClick('All', [])}
             >
@@ -159,7 +170,21 @@ class StudentList extends React.Component {
               ))}
             </NavDropdown>
           </div>
-          <div style={{ margin: '50px 100% 30px 0', width: '150px' }}>75 Students</div>
+          <div className="manage-groups">
+            <div style={{ paddingTop: '10px', width: '200px' }}>
+              {this.state.display_list.length} students
+            </div>
+            {this.state.is_a_prof ? (
+              <Link to="/ManageStudent" className="join-button manage-btn">
+                <button type="button" className="btn btn-info">
+                  Manage Group
+                </button>
+              </Link>
+            ) : (
+              ''
+            )}
+          </div>
+
           <ul className="list-group">
             {this.state.display_list.map((student, i) => (
               <div key={`${i}-student`}>

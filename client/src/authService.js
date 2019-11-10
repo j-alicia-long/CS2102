@@ -19,5 +19,13 @@ export const authService = {
     }
     const decoded = jwtDecode(token);
     return decoded;
+  },
+  getUsername() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return "";
+    }
+    const decoded = jwtDecode(token);
+    return decoded.uid;
   }
 };
