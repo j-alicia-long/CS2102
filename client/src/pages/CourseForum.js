@@ -47,8 +47,8 @@ class CourseForum extends React.Component {
   };
 
   fetchEntriesList = async () => {
-    const c_code = JSON.parse(localStorage.getItem("entry_code"));
-    const response = await fetch(`/${c_code}/entries`);
+    const c_code = JSON.parse(localStorage.getItem("course_code"));
+    const response = await fetch(`/forums/${c_code}/entries`);
     const body = await response.json();
 
     if (response.status !== 200) {
