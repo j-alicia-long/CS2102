@@ -1,13 +1,13 @@
-import React from "react";
-import { authService } from "../authService";
+import React from 'react';
+import { authService } from '../authService';
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+//import Col from 'react-bootstrap/Col'
 
-import Card from "react-bootstrap/Card";
-import CardDeck from "react-bootstrap/CardDeck";
-import Button from "react-bootstrap/Button";
+import Card from 'react-bootstrap/Card';
+import CardDeck from 'react-bootstrap/CardDeck';
+import Button from 'react-bootstrap/Button';
 
 class MainPage extends React.Component {
   render() {
@@ -21,9 +21,7 @@ class MainPage extends React.Component {
             <Card>
               <Card.Body>
                 <Card.Title>Browse Courses</Card.Title>
-                <Card.Text>
-                  Check out the best courses we have to offer.
-                </Card.Text>
+                <Card.Text>Check out the best courses we have to offer.</Card.Text>
                 <Button href="/CourseBrowse" variant="primary">
                   Browse
                 </Button>

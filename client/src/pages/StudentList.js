@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css';
 import CourseNavBar from './CourseNavBar';
-import { authService } from '../authService';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { NavDropdown } from 'react-bootstrap';
@@ -45,7 +44,7 @@ class StudentList extends React.Component {
       })
       .catch(err => console.log(err));
 
-    this.is_a_prof()
+    this.is_a_prof_ofCourse()
       .then(res => {
         this.setState({ is_a_prof: res.length ? true : false });
       })
@@ -98,10 +97,12 @@ class StudentList extends React.Component {
     return body;
   };
 
-  is_a_prof = async () => {
-    const uid = authService.getUsername();
-    const response = await fetch('/facilitators/check_prof/' + uid);
+  is_a_prof_ofCourse = async () => {
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const uid = JSON.parse(localStorage.getItem('user_id'));
+    const response = await fetch('/facilitators/checkIfProfOfCourse/' + uid + '/' + cid);
     const body = await response.json();
+    console.log(body);
     if (response.status !== 200) {
       throw Error(body.message);
     }

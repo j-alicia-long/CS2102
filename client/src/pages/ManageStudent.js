@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Button, Modal, Container, Row, Col, Dropdown, DropdownButton } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import accountIcon from '@iconify/icons-mdi/account';
 import { confirmAlert } from 'react-confirm-alert';
@@ -13,6 +13,7 @@ class ManageStudent extends React.Component {
   state = {
     login: false,
     course_details: [],
+    all_list: [],
     all_info_list: [],
     lect_list: [],
     lab_list: [],
@@ -20,15 +21,22 @@ class ManageStudent extends React.Component {
     distinct_lect: [],
     distinct_lab: [],
     distinct_tut: [],
-    m_lect_list: [],
-    m_tut_list: [],
-    m_lab_list: []
+    all_lessons: [],
+    try_list: [],
+    showModal: false,
+    curr_uid: ''
   };
 
   componentDidMount() {
     this.fetchCurrentCourse()
       .then(res => {
         this.setState({ course_details: res });
+      })
+      .catch(err => console.log(err));
+
+    this.fetchAllList()
+      .then(res => {
+        this.setState({ all_list: res });
       })
       .catch(err => console.log(err));
 
@@ -73,7 +81,24 @@ class ManageStudent extends React.Component {
         this.setState({ distinct_tut: res });
       })
       .catch(err => console.log(err));
+
+    this.getAllLessonsInCourse()
+      .then(res => {
+        this.setState({ all_lessons: res });
+      })
+      .catch(err => console.log(err));
   }
+
+  fetchAllList = async () => {
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/all/' + cid);
+    const body = await response.json();
+    console.log(body);
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
 
   fetchDistinct = async type => {
     const cid = JSON.parse(localStorage.getItem('course_code'));
@@ -140,8 +165,24 @@ class ManageStudent extends React.Component {
     return body;
   };
 
-  handleClick(gid, curr_gid, uid, type) {
-    if (gid === curr_gid) {
+  getAllLessonsInCourse = async () => {
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/courses/allLessonsInCourse/' + cid);
+    const body = await response.json();
+    console.log(body);
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
+
+  handleClick(lect_gid, tut_gid, lab_gid, lesson_gid, uid, l_type) {
+    console.log('lect_gid: ' + lect_gid);
+    console.log('tut_gid: ' + tut_gid);
+    console.log('lab_gid: ' + lab_gid);
+    console.log('lesson_gid: ' + lesson_gid);
+    console.log('uid: ' + uid);
+    if (lesson_gid === lect_gid || lesson_gid === tut_gid || lesson_gid === lab_gid) {
       alert('Student already in this group');
     } else {
       confirmAlert({
@@ -150,34 +191,43 @@ class ManageStudent extends React.Component {
         buttons: [
           {
             label: 'Yes',
-            onClick: () => this.changeLesson(gid, curr_gid, uid, type)
+            onClick: () => this.changeLesson(lesson_gid, uid, l_type)
           },
           {
             label: 'No',
-            onClick: () => alert('Cancelled')
+            onClick: () => confirmAlert({})
           }
         ]
       });
     }
   }
 
-  changeLesson = async (g_id, curr_gid, u_id, type) => {
+  changeLesson = async (lesson_gid, u_id, type) => {
     const c_id = JSON.parse(localStorage.getItem('course_code'));
-    console.log(g_id, curr_gid, u_id, type, c_id);
-    await fetch('/courses/lessons/delete', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        cid: c_id,
-        gid: g_id,
-        currgid: curr_gid,
-        uid: u_id,
-        l_type: type
-      })
-    });
+
+    /* Fetch gid of lesson to be delete */
+    const response = await fetch('/courses/fetchLessonByType/' + c_id + '/' + u_id + '/' + type);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+
+    if (body.length) {
+      await fetch('/courses/lessons/delete', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          cid: c_id,
+          gid: body[0].gid,
+          uid: u_id,
+          l_type: type
+        })
+      });
+    }
 
     await fetch('/courses/lessons/add', {
       method: 'POST',
@@ -187,8 +237,7 @@ class ManageStudent extends React.Component {
       },
       body: JSON.stringify({
         cid: c_id,
-        gid: g_id,
-        currgid: curr_gid,
+        gid: lesson_gid,
         uid: u_id,
         l_type: type
       })
@@ -201,10 +250,53 @@ class ManageStudent extends React.Component {
     const response = await fetch('/students/checkValidity/' + uid + '/' + gid_list);
     const body = await response.json();
 
+    return 1;
+  };
+
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open(uid, lect_gid, tut_gid, lab_gid) {
+    this.setState({
+      showModal: true,
+      curr_uid: uid,
+      curr_lect_gid: lect_gid,
+      curr_tut_gid: tut_gid,
+      curr_lab_gid: lab_gid
+    });
+
+    this.checkConflict(uid)
+      .then(res => {
+        this.setState({ try_list: res });
+      })
+      .catch(err => console.log(err));
+  }
+
+  checkConflict = async uid => {
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/checkConflict/' + uid + '/' + cid);
+    const body = await response.json();
+    console.log(body);
     return body;
   };
 
+  retrieveLect = async uid => {
+    const cid = JSON.parse(localStorage.getItem('course_code'));
+    const response = await fetch('/students/fetchLect/' + uid + '/' + cid);
+    const body = await response.json();
+    console.log(body);
+    return 1;
+  };
+
+  checkValues(message, uid) {
+    console.log(message + uid);
+  }
+
   render() {
+    var message = this.state.try_list.length
+      ? 'Modules that have conflicting schedule: '
+      : 'All lessons can be choosen';
     return (
       <div className="body">
         <div style={{ marginTop: '30px', paddingBottom: '30px' }}>
@@ -230,84 +322,70 @@ class ManageStudent extends React.Component {
                       {student.uid}
                     </p>
                   </div>
+
                   <div className="mx-auto">
-                    <div className="lesson-row" key={`${i}-lect-gid`}>
-                      <div className="lesson-info">Lecture: {student.lect_gid}</div>
-                      <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Update Lecture"
-                        drop="right"
-                      >
-                        {this.state.distinct_lect.map((item, index) => (
-                          <Dropdown.Item
-                            key={`${index}-lect-gid`}
-                            as="button"
-                            onClick={() =>
-                              this.handleClick(student.lect_gid, item.gid, student.uid, 'Lecture')
-                            }
-                            id="ggg"
-                            style={{
-                              textDecoration: this.checkValidity(student.uid, item.gid).length
-                                ? 'underline'
-                                : ''
-                            }}
-                          >
-                            {item.gid}
-                          </Dropdown.Item>
-                        ))}
-                      </DropdownButton>
+                    <div className="lesson-info mx-auto lesson-info">
+                      Lecture: {student.lect_gid}
                     </div>
-                    <div className="lesson-row" key={`${i}-tut-gid`}>
-                      <div className="lesson-info">Tutorial: {student.tut_gid}</div>
-                      <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Update Tutorial"
-                        drop="right"
-                      >
-                        {this.state.distinct_tut.map((item, index) => (
-                          <Dropdown.Item
-                            key={`${index}-tut-gid`}
-                            onClick={() =>
-                              this.handleClick(student.tut_gid, item.gid, student.uid, 'Tutorial')
-                            }
-                            style={{
-                              textDecoration: this.checkValidity(student.uid, item.gid).length
-                                ? 'underline'
-                                : ''
-                            }}
-                          >
-                            {item.gid}
-                          </Dropdown.Item>
-                        ))}
-                      </DropdownButton>
+                    <div className="lesson-info mx-auto lesson-info">
+                      Tutorial: {student.tut_gid}
                     </div>
-                    <div className="lesson-row" key={`${i}-lab-gid`}>
-                      <div className="lesson-info">Laboratory: {student.lab_gid}</div>
-                      <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Update Laboratory"
-                        drop="right"
-                      >
-                        {this.state.distinct_lab.map((item, index) => (
-                          <Dropdown.Item
-                            key={`${index}-lab-gid`}
-                            onClick={() =>
-                              this.handleClick(student.lab_gid, item.gid, student.uid, 'Lab')
-                            }
-                          >
-                            <div
-                              style={{
-                                textDecoration: this.checkValidity(student.uid, item.gid).length
-                                  ? 'underline'
-                                  : ''
-                              }}
-                            >
-                              {item.gid}
-                            </div>
-                          </Dropdown.Item>
-                        ))}
-                      </DropdownButton>
-                    </div>
+                    <div className="lesson-info mx-auto lesson-info">Lab: {student.lab_gid}</div>
+                  </div>
+
+                  <div className="mx-auto">
+                    <Button
+                      onClick={() =>
+                        this.open(student.uid, student.lect_gid, student.tut_gid, student.lab_gid)
+                      }
+                    >
+                      Modify
+                    </Button>
+
+                    <Modal show={this.state.showModal} onHide={() => this.close()}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Lessons</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Container>
+                          <Row>
+                            <Col>
+                              {this.state.all_lessons.map((all_lesson, i) => (
+                                <div key={`${i}-all_lesson`}>
+                                  <button
+                                    className="btn btn-outline-success mx-auto"
+                                    type="button"
+                                    onClick={() =>
+                                      this.handleClick(
+                                        this.state.curr_lect_gid,
+                                        this.state.curr_tut_gid,
+                                        this.state.curr_lab_gid,
+                                        all_lesson.gid,
+                                        this.state.curr_uid,
+                                        all_lesson.l_type
+                                      )
+                                    }
+                                  >
+                                    {all_lesson.gid}
+                                  </button>
+                                </div>
+                              ))}
+                            </Col>
+                            <Col>
+                              <h5 className="mx-auto">{message}</h5>
+                              {this.state.try_list.map((lessons, i) => (
+                                <div key={`${i}-lessons`}>
+                                  <code>{lessons.curr_gid}</code>
+                                </div>
+                              ))}
+                            </Col>
+                          </Row>
+                        </Container>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button onClick={() => this.close()}>Close</Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 </li>
               </div>
