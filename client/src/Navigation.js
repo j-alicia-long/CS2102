@@ -15,7 +15,7 @@ class Navigation extends React.Component {
 
     this.logout = this.logout.bind(this);
   }
-
+/*
   componentDidMount() {
     this.setUserInfo();
   }
@@ -26,11 +26,14 @@ class Navigation extends React.Component {
     }
     this.setUserInfo();
   }
+  */
 
   logout = () => {
     authService.logout();
     fetch("/auth/logout").then(this.props.history.push("/Login"));
   };
+
+  /*
 
   setUserInfo() {
     const user = authService.getUser();
@@ -38,7 +41,7 @@ class Navigation extends React.Component {
       this.setState({ name: user.name, userId: user.uid });
     }
   }
-
+*/
   render() {
     if (authService.loggedIn()) {
       return (

@@ -8,7 +8,7 @@ const getForum = (req, res) => {
   const f_code = req.params.f_code;
 
   pool.query(
-    'SELECT * FROM FORUM WHERE f_title = $1'
+    'SELECT * FROM FORUM WHERE cid = $1'
     [f_code],
     (error, results) => {
       if (error) {

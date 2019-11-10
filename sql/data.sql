@@ -482,16 +482,17 @@ INSERT INTO ManagesGroup VALUES ('CS4444_201901_LAB1', 'A0000026');
 
 -- Forum
 
-INSERT INTO Forums VALUES ('FEE1000', 'EE1000', '2019-01');
-INSERT INTO Forums VALUES ('FEE1111', 'EE1111', '2019-01');
-INSERT INTO Forums VALUES ('FEE2222', 'EE2222', '2019-01');
-INSERT INTO Forums VALUES ('FEE3333', 'EE3333', '2019-01');
-INSERT INTO Forums VALUES ('FEE4444', 'EE4444', '2019-01');
-INSERT INTO Forums VALUES ('FCS1000', 'CS1000', '2019-01');
-INSERT INTO Forums VALUES ('FCS1111', 'CS1111', '2019-01');
-INSERT INTO Forums VALUES ('FCS2222', 'CS2222', '2019-01');
-INSERT INTO Forums VALUES ('FCS3333', 'CS3333', '2019-01');
-INSERT INTO Forums VALUES ('FCS4444', 'CS4444', '2019-01');
+INSERT INTO Forums VALUES ('FEE1000', 'EE1000', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FEE1111', 'EE1111', '2019-01', 'General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FEE1111', 'EE1111', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FEE2222', 'EE2222', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FEE3333', 'EE3333', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FEE4444', 'EE4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FCS1000', 'CS1000', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FCS1111', 'CS1111', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FCS2222', 'CS2222', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FCS3333', 'CS3333', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
+INSERT INTO Forums VALUES ('FCS4444', 'CS4444', '2019-01','General Discussion', 'Posts on module related questions.', '10 Dec 2019');
 
 -- Entries
 
@@ -506,16 +507,18 @@ INSERT INTO Entries VALUES ('EEE3333_02', 'FEE3333', 'A0000008', 'This is Conten
 INSERT INTO Entries VALUES ('EEE4444_01', 'FEE4444', 'A0000009', 'This is Content 2 by A0000009', 'Title I', '2019-10-17', '09:00:00');
 INSERT INTO Entries VALUES ('EEE4444_02', 'FEE4444', 'A0000010', 'This is Content 2 by A0000010', 'Title J', '2019-10-18', '09:10:00');
 
-INSERT INTO Entries VALUES ('ECS1000_01', 'FCS1000', 'A0000011', 'This is Content 1 by A0000011', 'Title A', '2019-09-15', '09:00:00');
-INSERT INTO Entries VALUES ('ECS1000_02', 'FCS1000', 'A0000012', 'This is Content 1 by A0000012', 'Title B', '2019-09-15', '09:10:00');
-INSERT INTO Entries VALUES ('ECS1000_03', 'FCS1000', 'A0000013', 'This is Content 1 by A0000013', 'Title C', '2019-09-15', '09:20:00');
-INSERT INTO Entries VALUES ('ECS1000_04', 'FCS1000', 'A0000014', 'This is Content 1 by A0000014', 'Title D', '2019-09-15', '09:30:00');
-INSERT INTO Entries VALUES ('ECS1111_01', 'FCS1111', 'A0000015', 'This is Content 2 by A0000015', 'Title E', '2019-09-16', '09:00:00');
-INSERT INTO Entries VALUES ('ECS2222_01', 'FCS2222', 'A0000016', 'This is Content 2 by A0000016', 'Title F', '2019-09-16', '09:10:00');
-INSERT INTO Entries VALUES ('ECS3333_01', 'FCS3333', 'A0000017', 'This is Content 2 by A0000017', 'Title G', '2019-09-16', '09:20:00');
-INSERT INTO Entries VALUES ('ECS3333_02', 'FCS3333', 'A0000018', 'This is Content 2 by A0000018', 'Title H', '2019-09-16', '09:30:00');
-INSERT INTO Entries VALUES ('ECS4444_01', 'FCS4444', 'A0000019', 'This is Content 2 by A0000019', 'Title I', '2019-10-17', '09:00:00');
-INSERT INTO Entries VALUES ('ECS4444_02', 'FCS4444', 'A0000020', 'This is Content 2 by A0000020', 'Title J', '2019-10-18', '09:10:00');
+-- Threads
+
+INSERT INTO Thread VALUES ('TCS1000_01', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS1000_02', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS1000_03', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS1000_04', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS1111_01', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS2222_01', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS3333_01', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS3333_02', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS4444_01', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
+INSERT INTO Threads VALUES ('TCS4444_02', 'Questions regarding Midterms', 'A0000011', 'This is Content 1 by A0000011', '2019-09-15', '09:00:00');
 
 -- HasAccess
 
