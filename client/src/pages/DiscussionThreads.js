@@ -20,6 +20,7 @@ class DiscussionThreads extends React.Component {
     this.fetchThreadsList()
       .then(res => {
         this.setState({ threads_list: res });
+        
       })
       .catch(err => console.log(err));
 

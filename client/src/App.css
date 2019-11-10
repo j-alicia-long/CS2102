@@ -129,13 +129,23 @@
 }
 
 /* CourseForum */
-.forum-layout {
-  margin: 50px auto 100px;
+
+
+.new-button{
+  margin-left: auto;
 }
+
+.forum-layout {
+  margin: 50px auto 50px;
+  background: blue;
+  width: 100%;
+}
+
 
 .forum-card {
   margin: 30px auto;
   height: 120px;
+  background: blue;
 }
 
 .forum-description {

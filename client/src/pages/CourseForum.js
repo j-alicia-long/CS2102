@@ -96,33 +96,40 @@ class CourseForum extends React.Component {
   render() {
     return (
       <div>
-        <div className="body">
+        <div className = "body">
           <CourseNavBar />
           <div className="course-description">
             <div>
               {this.state.course_details.map(course => (
-                this.state.forum_list.map((forum, i) => (
-                  this.state.threads_list.map(threads => (
-                    this.state.entries_list.map(entries => (
-
-                      <div>
-                        <h2 style={{ textAlign: "left" }} key={course.cid}> {course.cid} FORUM</h2>
-                      </div>
-                    ))
-                  ))
-                ))
+                <div>
+                  <h2 style={{ textAlign: "left" }} key={course.cid}> {course.cid} FORUM</h2>
+                </div>
               ))}
-
               <div className="join-button">
                 <Nav.Link href="/ForumTopic" >
                   <Button className="btn-lg">Create New Topic</Button>
                 </Nav.Link>
               </div>
-
               <div className="forum-layout">
-              {this.state.forum_list.map((forum, i) => (
-                <h4 style={{ textAlign: "left", color: "grey" }} key={forum.f_title}> {forum.f_title} </h4>
-              ))}
+                <h4 style={{ textAlign: "left", color: "grey" }}> General Discussion</h4>
+              <Card className="forum-card">
+                  <div className="forum-description">
+                          <p className="forum-details">
+                            <h5 className="forum-title"> General Discussion</h5>
+                            <br></br>
+                            Visible until 10 Dec 2019
+                          </p>
+                          <p className="forum-threads" >
+                            <a href="/DiscussionThreads">
+                              <h6>2 Discussion Threads</h6>
+                            </a>
+                          </p>
+                          <p className="entry-date" >
+                            <h6>Last Post: 10 Nov 2019</h6>
+                            Re: Clarification of Finals.
+                          </p>
+                        </div>
+                </Card>
                 <Card className="forum-card">
                   {this.state.forum_list.map((forum, i) => (
                     this.state.threads_list.map(threads => (
@@ -151,8 +158,8 @@ class CourseForum extends React.Component {
               </div>
             </div>
           </div>
+          </div>
         </div>
-      </div>
     );
   }
 }
