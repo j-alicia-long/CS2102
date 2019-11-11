@@ -210,6 +210,23 @@ const fetchLessonByType = (req, res) => {
   );
 };
 
+const fetchLessonTypeOfCourse = (req, res) => {
+  const cid = req.params.cid;
+  const l_type = req.params.type;
+
+  pool.query(
+    'SELECT * FROM HasGroup WHERE cid= $1 AND l_type = $2',
+    [cid, l_type],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send(`Error fetching lessons from course with cid ${cid}`);
+      }
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
 // route paths
 router.get('', getCourses);
 router.get('/:id', getCourseById);
@@ -217,6 +234,7 @@ router.get('/:id/students', getStudentsInCourse);
 router.get('/checkstatus/:cid/:uid', checkEnrolStatus);
 router.get('/allLessonsInCourse/:cid', getAllLessonsInCourse);
 router.get('/fetchLessonByType/:cid/:uid/:l_type', fetchLessonByType);
+router.get('/fetchLessonType/:cid/:type', fetchLessonTypeOfCourse);
 
 router.post('/lessons/delete', deleteLesson);
 router.post('/lessons/add', addLesson);

@@ -18,6 +18,7 @@ import DiscussionThreads from './pages/DiscussionThreads';
 import NewForumEntry from './pages/NewForumEntry';
 import Account from './pages/Account';
 import ManageStudent from './pages/ManageStudent';
+import AddGroups from './pages/AddGroups';
 
 class App extends React.Component {
   render() {
@@ -39,6 +40,7 @@ class App extends React.Component {
             <Route exact path="/ForumTopic" component={ForumTopic} />
             <Route exact path="/ManageStudent" component={ManageStudent} />
             <Route exact path="/CourseForum" component={CourseForum} />
+            <Route exact path="/AddGroups" component={AddGroups} />
             <PrivateRoute exact path="/Account" component={Account} />
             <PrivateRoute exact path="/MyCourses" component={MyCourses} />
             <PrivateRoute exact path="/DiscussionThreads" component={DiscussionThreads} />

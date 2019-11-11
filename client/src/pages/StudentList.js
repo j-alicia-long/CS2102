@@ -3,7 +3,7 @@ import '../App.css';
 import CourseNavBar from './CourseNavBar';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { NavDropdown } from 'react-bootstrap';
+import { NavDropdown, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import accountIcon from '@iconify/icons-mdi/account';
@@ -172,18 +172,25 @@ class StudentList extends React.Component {
             </NavDropdown>
           </div>
           <div className="manage-groups">
-            <div style={{ paddingTop: '10px', width: '200px' }}>
-              {this.state.display_list.length} students
+            <div style={{ paddingTop: '10px' }}>{this.state.display_list.length} students</div>
+            <div style={{ marginLeft: 'auto' }}>
+              {this.state.is_a_prof ? (
+                <div>
+                  <Link to="/AddGroups" className="join-button manage-btn">
+                    <Button type="button" variant="success" className="student-btn">
+                      Assign Lessons to new students
+                    </Button>
+                  </Link>
+                  <Link to="/ManageStudent" className="join-button manage-btn">
+                    <Button type="button" variant="warning">
+                      Manage Group
+                    </Button>
+                  </Link>
+                </div>
+              ) : (
+                ''
+              )}
             </div>
-            {this.state.is_a_prof ? (
-              <Link to="/ManageStudent" className="join-button manage-btn">
-                <button type="button" className="btn btn-info">
-                  Manage Group
-                </button>
-              </Link>
-            ) : (
-              ''
-            )}
           </div>
 
           <ul className="list-group">

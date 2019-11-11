@@ -128,6 +128,10 @@
   padding-bottom: 20px;
 }
 
+.student-btn {
+  margin-right: 20px;
+}
+
 /* CourseForum */
 
 .new-button {
@@ -339,4 +343,10 @@ input.entry-attach {
 
 .te {
   text-decoration: line-through;
+}
+
+/* AddGroups */
+.addBtn {
+  height: 50px;
+  margin: auto;
 }

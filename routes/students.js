@@ -197,6 +197,29 @@ const checkConflict = (req, res) => {
   );
 };
 
+const getStudentsWithoutLessons = (req, res) => {
+  const cid = req.params.cid;
+
+  pool.query(
+    `SELECT S.uid FROM SELECTS S WHERE S.cid = $1 
+    EXCEPT
+    (SELECT DISTINCT uid FROM AssignLect WHERE cid = $1
+    UNION
+    SELECT DISTINCT uid FROM AssignTut WHERE cid = $1
+    UNION
+    SELECT DISTINCT uid FROM AssignLab WHERE cid = $1)`,
+    [cid],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.status(400).send('Error fetching all students without lessons in course');
+      }
+      const students = filterStudents(req.query, results.rows);
+      res.status(200).json(students);
+    }
+  );
+};
+
 // route paths
 router.get('', getStudents);
 router.get('/:id', getStudentById);
@@ -210,5 +233,6 @@ router.get('/lab/:cid', getStudentsInLab);
 router.get('/tutorial/:cid', getStudentsInTutorial);
 router.get('/all_info/:cid', getAllStudentsInfoInCourse);
 router.get('/checkConflict/:uid/:cid', checkConflict);
+router.get('/all_noLessons/:cid', getStudentsWithoutLessons);
 
 module.exports = router;
