@@ -7,7 +7,7 @@
   "description": "A new course management system designed for universities. Read the comprehensive project report [here](https://docs.google.com/document/d/1ENF5UO0I38q2edzLOLcoxlV74OWQ3HdITq-fU0ZmC04/edit?usp=sharing)",
   "main": "server.js",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
